@@ -1,58 +1,51 @@
 import React, { Component } from 'react'
 
 class Form extends Component {
-  initialState = {
-    task: '',
-    desc: '',
-    date: '0/0/00',
-    priority: '0',
-  }
+     initialState = {
+            name: '',
+            job: '',
+          }
 
-  state = this.initialState
+     state = this.initialState
 
-handleChange = event => {
-    const { name, value } = event.target
-  
-    this.setState({
-      [name]: value,
-    })
-  }
+   handleChange = event => {
+        const { name, value } = event.target
 
-  submitForm = () => {
-    this.props.handleSubmit(this.state)
-    this.setState(this.initialState)
-  }
+        this.setState({
+               [name]: value,
+             })
+   }
 
-  render() {
-    const { task, desc, priority } = this.state;
-  
-    return (
-      <form>
-        <label htmlFor="task">Task</label>
-        <input
-          type="text"
-          name="task"
-          id="task"
-          value={task}
-          onChange={this.handleChange} />
-        <label htmlFor="desc">Task Description</label>
-        <input
-          type="text"
-          name="desc"
-          id="desc"
-          value={desc}
-          onChange={this.handleChange} />
-        <label htmlFor="priority">Priority</label>
-        <input
-          type="text"
-          name="priority"
-          id="priority"
-          value={priority}
-          onChange={this.handleChange} />
-        <input type="button" value="Submit" onClick={this.submitForm} />
-      </form>
-    );
-  }
-} 
+   submitForm = () => {
+        this.props.handleSubmit(this.state)
+        this.setState(this.initialState)
+   }
 
-export default Form;
+
+   render() {
+        const { name, job } = this.state;
+
+        return (
+               <form>
+                 <label htmlFor="name">Name</label>
+                 <input
+                   type="text"
+                   name="name"
+                   id="name"
+                   value={name}
+                   onChange={this.handleChange} />
+                 <label htmlFor="job">Job</label>
+                 <input
+                   type="text"
+                   name="job"
+                   id="job"
+                   value={job}
+                   onChange={this.handleChange} />
+                  <input type="button" value="Submit" onClick={this.submitForm} />
+               </form>
+             );
+   }
+
+}
+
+export default Form
