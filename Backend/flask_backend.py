@@ -10,7 +10,7 @@ from flask_cors import CORS
 # import string
 
 # for mongo db
-from model_mongodb import User
+from mongo_database import User
 
 
 app = Flask(__name__)
