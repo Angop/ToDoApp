@@ -18,10 +18,6 @@ app = Flask(__name__)
 #Here we'll allow requests coming from any domain. Not recommended for production environment.
 CORS(app) 
 
-users = { 
-   'users_list' : []
-}
-
 
 @app.route('/')
 
@@ -40,15 +36,28 @@ def get_users():
    if request.method == 'GET':
       search_username = request.args.get('name')
       search_job = request.args.get('job')
-      if search_username and search_job :
-         return find_users_by_name_job(search_username, search_job) 
-      elif search_username  :
-         users = User().find_by_name(search_username)
-      elif search_job  :
-         return find_users_by_job(search_job) 
-      else:
+      users = []
+
+      if search_username:
+         users.extend(User().find_by_name(search_username))
+      if search_job:
+         users.extend(User().find_by_job(search_job))
+      # remove duplicate users (matched user and job)?? dd
+      if not search_username and not search_job:
          users = User().find_all()
       return {"users_list": users}
+
+
+      # if search_username and search_job :
+      #    return find_users_by_name_job(search_username, search_job) 
+      # elif search_username  :
+      #    users = User().find_by_name(search_username)
+      # elif search_job  :
+      #    return find_users_by_job(search_job) 
+      # else:
+      #    users = User().find_all()
+      # return {"users_list": users}
+
    elif request.method == 'POST':
       userToAdd = request.get_json()
       # userToAdd['id'] = gen_random_id() # check for duplicate before appending.. todo
@@ -59,11 +68,13 @@ def get_users():
       newUser.save()
       resp = jsonify(newUser), 201
       return resp
+
    elif request.method == 'DELETE':
       userToDelete = request.get_json()
-      users['users_list'].remove(userToDelete)
-      resp = jsonify(success=True)
-      resp.status_code = 200
+      remUser = User(userToDelete)
+      resp = remUser.remove_by_id() # db request to remove user
+      # users['users_list'].remove(userToDelete)
+      resp = jsonify(remUser), 200
       # 200 is the default code for a normal response
       return resp
       

@@ -47,3 +47,16 @@ class User(Model):
         for user in users:
             user["_id"] = str(user["_id"])
         return users
+
+    def find_by_job(self, job):
+        users = list(self.collection.find({"job": job}))
+        for user in users:
+            user["_id"] = str(user["_id"])
+        return users
+    
+    def remove_by_id(self):
+        if self._id:
+            resp = self.collection.remove({"_id": ObjectId(self._id)})
+            self.clear()
+            return resp.nRemoved > 0
+        return False
