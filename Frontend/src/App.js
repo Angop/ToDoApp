@@ -25,7 +25,6 @@ class App extends Component {
    removeCharacter = index => {
       const { characters } = this.state
       let character = characters[index];
-      console.log(character);
 
       if(this.makeDeleteCall(character)){
           this.setState({
@@ -38,7 +37,8 @@ class App extends Component {
 
    makeDeleteCall(character){
       console.log(character);
-      return axios.delete('http://localhost:5000/users', { data: { id: character.id } })
+      console.log({ data: { _id: character._id } });
+      return axios.delete('http://localhost:5000/users', { data: { _id: character._id } })
          .then(function (response) {
             console.log(response);
             return response === 200;

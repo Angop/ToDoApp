@@ -72,7 +72,7 @@ def get_users():
    elif request.method == 'DELETE':
       userToDelete = request.get_json()
       remUser = User(userToDelete)
-      resp = remUser.remove_by_id() # db request to remove user
+      resp = remUser.remove() # db request to remove user
       # users['users_list'].remove(userToDelete)
       resp = jsonify(remUser), 200
       # 200 is the default code for a normal response
