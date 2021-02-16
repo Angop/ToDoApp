@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Dropdown } from 'react-bootstrap';
+
 
 const TableHeader = () => {
 	  return (
@@ -20,6 +22,18 @@ const TableBody = props => {
                  <td>{row.desc}</td>
                  <td>
                    <button onClick={() => props.removeCharacter(index)}>Delete</button>
+                 </td>
+                 <td>
+                  <Dropdown>
+                      <Dropdown.Toggle variant="success" id="dropdown-basic">
+                          Edit
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => props.removeCharacter(index)}>Delete</Dropdown.Item>
+                        <Dropdown.Item href="markascomplete">Mark as Complete</Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
                  </td>
                </tr>
 			          )
