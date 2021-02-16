@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"name": "ToDoApp",
+			"path": "."
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true,
+		"python.pythonPath": "C:\\Users\\user01\\AppData\\Local\\Programs\\Python\\Python39\\python.exe"
+	}
+}
