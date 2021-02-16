@@ -7,8 +7,6 @@ const TableHeader = () => {
 		      <thead>
 		        <tr>
 		          <th>Task</th>
-		          <th>Description</th>
-		          <th>Remove</th>
 		        </tr>
 		      </thead>
 		    )
@@ -20,9 +18,6 @@ const TableBody = props => {
                <tr key={index}>
                  <td>{row.task}</td>
                  <td>{row.desc}</td>
-                 <td>
-                   <button onClick={() => props.removeCharacter(index)}>Delete</button>
-                 </td>
                  <td>
                   <Dropdown>
                       <Dropdown.Toggle variant="success" id="dropdown-basic">

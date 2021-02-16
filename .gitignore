@@ -3,3 +3,4 @@
 *.json
 Frontend/package.json
 Frontend/package-lock.json
+Frontend/.eslintcache
