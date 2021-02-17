@@ -7,7 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 class App extends Component {
 	  state = {
-        characters: []
+        characters: [],
+        completed:[]
      }
 
 
@@ -60,6 +61,9 @@ class App extends Component {
       });
    }
 
+   handleCompletedSubmit = complete => {
+      this.setState({ completed: [...this.state.completed, complete]});
+   }
 
 
    makePostCall(character){

@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { Dropdown } from 'react-bootstrap';
-
+import { Dropdown } from 'react-bootstrap'
+import Checkbox from './Checkbox'
 
 const TableHeader = () => {
 	  return (
 		      <thead>
 		        <tr>
 		          <th>Task</th>
+              <th></th>
+              <th>Mark Complete</th>
 		        </tr>
 		      </thead>
 		    )
@@ -19,6 +21,9 @@ const TableBody = props => {
                  <td>{row.task}</td>
                  <td>{row.desc}</td>
                  <td>
+                   <Checkbox />
+                 </td>
+                 <td>
                   <Dropdown>
                       <Dropdown.Toggle variant="success" id="dropdown-basic">
                           Edit
@@ -26,7 +31,7 @@ const TableBody = props => {
 
                       <Dropdown.Menu>
                         <Dropdown.Item onClick={() => props.removeCharacter(index)}>Delete</Dropdown.Item>
-                        <Dropdown.Item href="markascomplete">Mark as Complete</Dropdown.Item>
+                        <Dropdown.Item href="something">Edit Task</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                  </td>
@@ -36,8 +41,6 @@ const TableBody = props => {
 
 	  return <tbody>{rows}</tbody>
 }
-
-
 
 const Table = props => {
      const { characterData, removeCharacter } = props
