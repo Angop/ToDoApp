@@ -6,9 +6,10 @@ const TableHeader = () => {
 	  return (
 		      <thead>
 		        <tr>
+              <th></th>
 		          <th>Task</th>
               <th></th>
-              <th>Mark Complete</th>
+              <th></th>
 		        </tr>
 		      </thead>
 		    )
@@ -18,11 +19,11 @@ const TableBody = props => {
 	  const rows = props.characterData.map((row, index) => {
 		      return (
                <tr key={index}>
-                 <td>{row.task}</td>
-                 <td>{row.desc}</td>
                  <td>
                    <Checkbox />
                  </td>
+                 <td>{row.task}</td>
+                 <td>{row.desc}</td>
                  <td>
                   <Dropdown>
                       <Dropdown.Toggle variant="success" id="dropdown-basic">
