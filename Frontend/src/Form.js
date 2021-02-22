@@ -4,6 +4,7 @@ class Form extends Component {
      initialState = {
             task: '',
             desc: '',
+            priority: '',
           }
 
      state = this.initialState
@@ -17,13 +18,19 @@ class Form extends Component {
    }
 
    submitForm = () => {
+     let nPriority = parseInt(this.state.priority)
+     if (nPriority !== NaN && nPriority > 0 && nPriority <= 10) { // Check that the priority is valid
         this.props.handleSubmit(this.state)
         this.setState(this.initialState)
+     }
+     else {
+      alert("Priority must be a number from 1 to 10.")
+     }
    }
 
 
    render() {
-        const { task, desc } = this.state;
+        const { task, desc, priority } = this.state;
 
         return (
                <form>
@@ -40,6 +47,13 @@ class Form extends Component {
                    name="desc"
                    id="desc"
                    value={desc}
+                   onChange={this.handleChange} />
+                 <label htmlFor="priority">Priority (Number 1-10)</label>
+                 <input
+                   type="text"
+                   name="priority"
+                   id="priority"
+                   value={priority}
                    onChange={this.handleChange} />
                   <input type="button" value="Submit" onClick={this.submitForm} />
                </form>

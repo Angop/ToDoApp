@@ -1,22 +1,26 @@
 import React, { Component } from 'react'
 import { Dropdown } from 'react-bootstrap'
 import Checkbox from './Checkbox'
+import ProgressBar from 'react-bootstrap/ProgressBar'
 
 const TableHeader = () => {
 	  return (
 		      <thead>
 		        <tr>
+              <th>Tasks</th>
+		          <th></th>
               <th></th>
-		          <th>Task</th>
-              <th></th>
+              <th style={{width: '10%'}}>Priority</th>
               <th></th>
 		        </tr>
 		      </thead>
-		    )
+		    ) // style width ensures the priority bar displays correctly
 }
 
 const TableBody = props => {
 	  const rows = props.characterData.map((row, index) => {
+      let priBar = parseInt(row.priority) * 10
+      let priVar = (priBar > 66 ? "danger" : (priBar > 33 ? "warning" : "success"))
 		      return (
                <tr key={index}>
                  <td>
@@ -24,6 +28,7 @@ const TableBody = props => {
                  </td>
                  <td>{row.task}</td>
                  <td>{row.desc}</td>
+                 <td><ProgressBar striped variant={priVar} now={priBar} /></td>
                  <td>
                   <Dropdown>
                       <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -47,7 +52,7 @@ const Table = props => {
      const { characterData, removeCharacter } = props
 
      return (
-            <table>
+            <table style={{width: '100%'}}>
               <TableHeader />
               <TableBody characterData={characterData} removeCharacter={removeCharacter} />
             </table>
