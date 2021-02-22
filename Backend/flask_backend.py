@@ -90,7 +90,6 @@ def get_user(id):
       
 def find_users_by_name(name):
    subdict = {'users_list' : []}
-   print(users)
    for user in users['users_list']:
       if user['name'] == name:
          subdict['users_list'].append(user)
