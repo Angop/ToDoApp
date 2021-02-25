@@ -57,6 +57,7 @@ class Form extends Component {
                    <option name="type" id="type" value="Work">Work</option>
                    <option name="type" id="type" value="Errand">Errand</option>
                    <option name="type" id="type" value="House Work">House Work</option>
+                   <option name="type" id="type" value="Other">Other</option>
                  </select> 
 
                  <label htmlFor="priority">Priority (Number 1-10)</label>
