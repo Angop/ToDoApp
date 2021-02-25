@@ -31,7 +31,7 @@ class Form extends Component {
 
 
     render() {
-        const { task, desc, type, priority } = this.state;
+        const { task, desc, priority } = this.state;
 
         return (
                <form>
