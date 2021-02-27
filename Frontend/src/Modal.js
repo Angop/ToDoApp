@@ -4,26 +4,13 @@ import Modal from 'react-bootstrap/Modal';
 
 class MyModal extends Component {
 
-     state = this.setInitialState()
-
-
-     setInitialState() {
-        console.log(this.props.modalCharacter)
-         if (this.props.modalCharacter) {
-            return {
-                task: this.props.modalCharacter.task,
-                desc: this.props.modalCharacter.desc,
-                priority: this.props.modalCharacter.priority,
-            }
-        }
-        else {
-            return {
-                task: '',
-                desc: '',
-                priority: '',
-            }
-        }
+     initialState = {
+       task: '',
+       desc: '',
+       priority: ''
      }
+     state = this.initialState
+
 
    handleChange = event => {
         const { name, value } = event.target
@@ -33,31 +20,63 @@ class MyModal extends Component {
         })
    }
 
+   componentDidUpdate({_id}) { // if a new character is given, change the state
+    if (this.props._id !== this.state._id) {
+      this.setState({task: this.props.task})
+      this.setState({desc: this.props.desc})
+      this.setState({priority: this.props.priority})
+      this.setState({_id: this.props._id})
+    }
+   }
+
    submitForm = () => {
      let nPriority = parseInt(this.state.priority)
      if (nPriority !== NaN && nPriority > 0 && nPriority <= 10) { // Check that the priority is valid
-        this.props.handleModalSubmit(this.state)
+        this.props.handleModalSubmit({task: this.state.task,
+                                      desc: this.state.desc,
+                                      priority: this.state.priority,
+                                      _id: this.props._id})
         this.setState(this.initialState)
+        this.props.closeModal()
      }
      else {
       alert("Priority must be a number from 1 to 10.")
      }
-     this.props.closeModal()
     }
 
     render = () => {
-        const { task, desc, priority, show } = this.state;
-        console.log(this.props.modalCharacter)
-        console.log(this.state.task)
-        // I really don't understand. it should just return this, which I think works
+        // const { task, desc, priority, show } = this.state;
+
         return (
          <Modal show={this.props.show} onHide={this.props.closeModal}>
-         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+         <Modal.Header>
+          <Modal.Title>Edit task</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+                 <label htmlFor="task">Task</label>
+                 <input
+                   type="text"
+                   name="task"
+                   id="task"
+                   value={this.state.task}
+                   onChange={this.handleChange} />
+                 <label htmlFor="desc">Description</label>
+                 <input
+                   type="text"
+                   name="desc"
+                   id="desc"
+                   value={this.state.desc}
+                   onChange={this.handleChange} />
+                 <label htmlFor="priority">Priority (Number 1-10)</label>
+                 <input
+                   type="text"
+                   name="priority"
+                   id="priority"
+                   value={this.state.priority}
+                   onChange={this.handleChange} />
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.submitForm}>
+          <Button variant="secondary" onClick={this.props.closeModal}>
             Close
           </Button>
           <Button variant="primary" onClick={this.submitForm}>

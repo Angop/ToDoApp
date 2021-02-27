@@ -11,6 +11,7 @@ class App extends Component {
         characters: [],
         completed:[],
         showModal: false,
+        setCharacter: false, // tells modal.js it has a new character
         modalCharacter: null
      }
 
@@ -43,28 +44,36 @@ class App extends Component {
    openModal = index => {
       const { characters } = this.state
       this.setState({ modalCharacter: characters[index] });
-      this.setState({showModal: true });
+      this.setState({ showModal: true });
+      this.setState({ setCharacter : true });
    }
 
    closeModal = () => {
       this.setState({ modalCharacter: null });
-      this.setState({showModal: false});
+      this.setState({ showModal: false});
    }
 
    handleModalSubmit = character => {
-      this.handleSubmit(character);
+      // this.handleSubmit(character);
+      this.updateCharacter(character)
       this.closeModal()
    }
 
-   updateCharacter = index => {
+   updateCharacter = character => {
       const { characters } = this.state
-      let character = characters[index];
 
-      console.log("update character")
       if(this.makePutCall(character)){
-         characters[index] = character
+         var updatedCharacters = []
+         for (let i=0; i<characters.length; i++) { // get an updated character list
+            if (character._id == characters[i]._id) {
+               updatedCharacters.push(character)
+            }
+            else {
+               updatedCharacters.push(characters[i])
+            }
+         }
          this.setState({
-            characters // no idea if this is right
+            characters: updatedCharacters
          })
       }
    }
@@ -123,13 +132,15 @@ class App extends Component {
    }
 
    render() {
-        const { characters, showModal, modalCharacter } = this.state
+        const { characters, showModal, setCharacter, modalCharacter } = this.state
 
+        let x = modalCharacter
         return (
              <div className="container">
                <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}  openModal={this.openModal} />
                <Form handleSubmit={this.handleSubmit} />
-              <MyModal show={showModal} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} modalCharacter={modalCharacter} />
+              <MyModal show={showModal} newCharacter={setCharacter} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} 
+               task={x ? modalCharacter.task : ''} desc={x ? modalCharacter.desc : ''} priority={x ? modalCharacter.priority : ''} _id={x ? modalCharacter._id: ''}/>
              </div>
              )
    }

@@ -31,7 +31,7 @@ def hello_world():
 #   return random_id
 
 
-@app.route('/users', methods=['GET', 'POST','DELETE'])
+@app.route('/users', methods=['GET', 'POST','DELETE','PUT'])
 def get_users():
    if request.method == 'GET':
       search_username = request.args.get('name')
@@ -76,6 +76,14 @@ def get_users():
       # users['users_list'].remove(userToDelete)
       resp = jsonify(remUser), 200
       # 200 is the default code for a normal response
+      return resp
+
+   elif request.method == 'PUT':
+      userToPut = request.get_json()
+      # make DB request to add user
+      updatedUser= User(userToPut)
+      updatedUser.save()
+      resp = jsonify(updatedUser), 204
       return resp
       
 @app.route('/users/<id>', methods=['GET'])

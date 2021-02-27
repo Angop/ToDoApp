@@ -11,10 +11,12 @@ class Model(dict):
 
     def save(self):
         if not self._id:
+            # creates a new user
             self.collection.insert(self)
         else:
+            # updates an existing user
             self.collection.update(
-                { "_id": ObjectId(self._id) }, self)
+                { "_id": ObjectId(self._id) }, {"task": self.task, "desc": self.desc, "priority": self.priority})
         self._id = str(self._id)
 
     def reload(self):
