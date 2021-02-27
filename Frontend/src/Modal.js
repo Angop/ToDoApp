@@ -85,26 +85,8 @@ class MyModal extends Component {
         </Modal.Footer>
         </Modal>
 
-        ); // TODO add a cancel button
+        );
     }
 }
-            //    <modal>
-            //      <h2>Hello Modal</h2>
-            //      <div className="form-group">
-            //        <label>Enter Name:</label>
-            //        <input
-            //          type="text"
-            //          value={this.state.desc}
-            //          name="desc"
-            //          onChange={e => this.handleChange(e)}
-            //          className="form-control"
-            //        />
-            //      </div>
-            //      <div className="form-group">
-            //        <button onClick={e => this.submitForm(e)} type="button">
-            //          Save
-            //        </button>
-            //      </div>
-            //    </modal>
 
 export default MyModal
