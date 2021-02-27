@@ -4,6 +4,7 @@ class Form extends Component {
      initialState = {
             task: '',
             desc: '',
+            type: '',
             priority: '',
           }
 
@@ -17,19 +18,19 @@ class Form extends Component {
              })
    }
 
-   submitForm = () => {
-     let nPriority = parseInt(this.state.priority)
-     if (nPriority !== NaN && nPriority > 0 && nPriority <= 10) { // Check that the priority is valid
+    submitForm = () => {
+      let nPriority = parseInt(this.state.priority)
+      if (nPriority !== NaN && nPriority > 0 && nPriority <= 10) { // Check that the priority is valid
         this.props.handleSubmit(this.state)
         this.setState(this.initialState)
      }
      else {
-      alert("Priority must be a number from 1 to 10.")
+         alert("Priority must be a number from 1 to 10.")
      }
    }
 
 
-   render() {
+    render() {
         const { task, desc, priority } = this.state;
 
         return (
@@ -41,6 +42,7 @@ class Form extends Component {
                    id="task"
                    value={task}
                    onChange={this.handleChange} />
+
                  <label htmlFor="desc">Description</label>
                  <input
                    type="text"
@@ -48,6 +50,16 @@ class Form extends Component {
                    id="desc"
                    value={desc}
                    onChange={this.handleChange} />
+
+                 <label htmlFor="type">Type</label>
+                 <select name="type" onChange={this.handleChange}>
+                   <option selected disabled>Please choose...</option>  <option name="type" id="type" value="School">School</option>
+                   <option name="type" id="type" value="Work">Work</option>
+                   <option name="type" id="type" value="Errand">Errand</option>
+                   <option name="type" id="type" value="House Work">House Work</option>
+                   <option name="type" id="type" value="Other">Other</option>
+                 </select> 
+
                  <label htmlFor="priority">Priority (Number 1-10)</label>
                  <input
                    type="text"

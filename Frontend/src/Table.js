@@ -7,9 +7,10 @@ const TableHeader = () => {
 	  return (
 		      <thead>
 		        <tr>
-              <th>Tasks</th>
-		          <th></th>
-              <th></th>
+              <th>Select</th>
+	      <th>Tasks</th>
+              <th>Description</th>
+              <th>Type</th>
               <th style={{width: '10%'}}>Priority</th>
               <th></th>
 		        </tr>
@@ -28,6 +29,7 @@ const TableBody = props => {
                  </td>
                  <td>{row.task}</td>
                  <td>{row.desc}</td>
+                 <td>{row.type}</td>
                  <td><ProgressBar striped variant={priVar} now={priBar} /></td>
                  <td>
                   <Dropdown>
