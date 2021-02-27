@@ -140,7 +140,7 @@ class App extends Component {
                <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}  openModal={this.openModal} />
                <Form handleSubmit={this.handleSubmit} />
               <MyModal show={showModal} newCharacter={setCharacter} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} 
-               task={x ? modalCharacter.task : ''} desc={x ? modalCharacter.desc : ''} priority={x ? modalCharacter.priority : ''} _id={x ? modalCharacter._id: ''}/>
+              modalCharacter={modalCharacter}/>
              </div>
              )
    }
@@ -149,3 +149,4 @@ class App extends Component {
 
 
 export default App
+               // task=x ? modalCharacter.task : '' desc=x ? modalCharacter.desc : '' priority=x ? modalCharacter.priority : '' _id=x ? modalCharacter._id: ''

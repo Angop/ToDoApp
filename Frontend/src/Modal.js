@@ -21,21 +21,24 @@ class MyModal extends Component {
    }
 
    componentDidUpdate({_id}) { // if a new character is given, change the state
-    if (this.props._id !== this.state._id) {
-      this.setState({task: this.props.task})
-      this.setState({desc: this.props.desc})
-      this.setState({priority: this.props.priority})
-      this.setState({_id: this.props._id})
+    if (this.props.modalCharacter && (this.props.modalCharacter._id !== this.state._id)) {
+      this.setState({task: this.props.modalCharacter.task})
+      this.setState({desc: this.props.modalCharacter.desc})
+      this.setState({priority: this.props.modalCharacter.priority})
+      this.setState({_id: this.props.modalCharacter._id})
     }
    }
 
    submitForm = () => {
      let nPriority = parseInt(this.state.priority)
      if (nPriority !== NaN && nPriority > 0 && nPriority <= 10) { // Check that the priority is valid
-        this.props.handleModalSubmit({task: this.state.task,
-                                      desc: this.state.desc,
-                                      priority: this.state.priority,
-                                      _id: this.props._id})
+      if (this.props.modalCharacter) {
+        var modChar = this.props.modalCharacter
+        modChar.task = this.state.task
+        modChar.desc = this.state.desc
+        modChar.priority = this.state.priority
+        this.props.handleModalSubmit({modChar})
+        }
         this.setState(this.initialState)
         this.props.closeModal()
      }

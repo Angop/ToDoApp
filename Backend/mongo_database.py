@@ -16,7 +16,7 @@ class Model(dict):
         else:
             # updates an existing user
             self.collection.update(
-                { "_id": ObjectId(self._id) }, {"task": self.task, "desc": self.desc, "priority": self.priority})
+                { "_id": ObjectId(self._id) }, {"task": self.task, "desc": self.desc, "priority": self.priority, "type": self.type})
         self._id = str(self._id)
 
     def reload(self):
