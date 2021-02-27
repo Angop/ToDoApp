@@ -10,7 +10,7 @@ class App extends Component {
 	  state = {
         characters: [],
         completed:[],
-        showModal: true,
+        showModal: false,
         modalCharacter: null
      }
 
@@ -42,11 +42,13 @@ class App extends Component {
 
    openModal = index => {
       const { characters } = this.state
-      this.setState({ modalCharacter: characters[index] }, {showModal: true });
+      this.setState({ modalCharacter: characters[index] });
+      this.setState({showModal: true });
    }
 
    closeModal = () => {
-      this.setState({ modalCharacter: null }, {showModal: false});
+      this.setState({ modalCharacter: null });
+      this.setState({showModal: false});
    }
 
    handleModalSubmit = character => {
@@ -127,7 +129,7 @@ class App extends Component {
              <div className="container">
                <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}  openModal={this.openModal} />
                <Form handleSubmit={this.handleSubmit} />
-               <MyModal show={showModal} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} modalCharacter={modalCharacter} />
+              <MyModal show={showModal} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} modalCharacter={modalCharacter} />
              </div>
              )
    }

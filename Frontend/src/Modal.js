@@ -8,9 +8,10 @@ class MyModal extends Component {
 
 
      setInitialState() {
+        console.log(this.props.modalCharacter)
          if (this.props.modalCharacter) {
             return {
-                task: this.props.modalCharacter,
+                task: this.props.modalCharacter.task,
                 desc: this.props.modalCharacter.desc,
                 priority: this.props.modalCharacter.priority,
             }
@@ -44,11 +45,13 @@ class MyModal extends Component {
      this.props.closeModal()
     }
 
-    render() {
-         const { task, desc, priority, show } = this.state;
-
+    render = () => {
+        const { task, desc, priority, show } = this.state;
+        console.log(this.props.modalCharacter)
+        console.log(this.state.task)
+        // I really don't understand. it should just return this, which I think works
         return (
-         <Modal show={this.props.show} onHide={this.props.closeModal()}>
+         <Modal show={this.props.show} onHide={this.props.closeModal}>
          <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
