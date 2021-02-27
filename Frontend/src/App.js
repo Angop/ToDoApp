@@ -2,13 +2,16 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Table from './Table'
 import Form from './Form'
+import myModal from './Modal';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 class App extends Component {
 	  state = {
         characters: [],
-        completed:[]
+        completed:[],
+        showModal: true,
+        modalCharacter: null
      }
 
 
@@ -35,6 +38,44 @@ class App extends Component {
               }),
           })
       }
+   }
+
+   openModal = index => {
+      this.setState({ showModal: true }, {modalCharacter: this.state.characters[index]});
+   }
+
+   closeModal() {
+      this.setState({ showModal: false }, {modalCharacter: null});
+   }
+
+   handleModalSubmit = character => {
+      this.handleSubmit(character);
+      this.closeModal()
+   }
+
+   updateCharacter = index => {
+      const { characters } = this.state
+      let character = characters[index];
+
+      console.log("update character")
+      if(this.makePutCall(character)){
+         characters[index] = character
+         this.setState({
+            characters // no idea if this is right
+         })
+      }
+   }
+
+   makePutCall(character){
+      return axios.put('http://localhost:5000/users', character)
+         .then(function (response) {
+            console.log(response);
+            return response;
+         })
+         .catch(function (error) {
+            console.log(error);
+            return null;
+         });
    }
 
    makeDeleteCall(character){
@@ -79,12 +120,13 @@ class App extends Component {
    }
 
    render() {
-        const { characters } = this.state
+        const { characters, showModal, modalCharacter } = this.state
 
         return (
              <div className="container">
-               <Table characterData={characters} removeCharacter={this.removeCharacter} />
+               <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}  openModal={this.openModal} />
                <Form handleSubmit={this.handleSubmit} />
+               <myModal show={showModal} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} modalCharacter={modalCharacter} />
              </div>
              )
    }
