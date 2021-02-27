@@ -2,13 +2,17 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Table from './Table'
 import Form from './Form'
+import MyModal from './Modal';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 class App extends Component {
 	  state = {
         characters: [],
-        completed:[]
+        completed:[],
+        showModal: false,
+        setCharacter: false, // tells modal.js it has a new character
+        modalCharacter: null
      }
 
 
@@ -35,6 +39,55 @@ class App extends Component {
               }),
           })
       }
+   }
+
+   openModal = index => {
+      const { characters } = this.state
+      this.setState({ modalCharacter: characters[index] });
+      this.setState({ showModal: true });
+      this.setState({ setCharacter : true });
+   }
+
+   closeModal = () => {
+      this.setState({ modalCharacter: null });
+      this.setState({ showModal: false});
+   }
+
+   handleModalSubmit = character => {
+      // this.handleSubmit(character);
+      this.updateCharacter(character)
+      this.closeModal()
+   }
+
+   updateCharacter = character => {
+      const { characters } = this.state
+
+      if(this.makePutCall(character)){
+         var updatedCharacters = []
+         for (let i=0; i<characters.length; i++) { // get an updated character list
+            if (character._id == characters[i]._id) {
+               updatedCharacters.push(character)
+            }
+            else {
+               updatedCharacters.push(characters[i])
+            }
+         }
+         this.setState({
+            characters: updatedCharacters
+         })
+      }
+   }
+
+   makePutCall(character){
+      return axios.put('http://localhost:5000/users', character)
+         .then(function (response) {
+            console.log(response);
+            return response;
+         })
+         .catch(function (error) {
+            console.log(error);
+            return null;
+         });
    }
 
    makeDeleteCall(character){
@@ -79,12 +132,15 @@ class App extends Component {
    }
 
    render() {
-        const { characters } = this.state
+        const { characters, showModal, setCharacter, modalCharacter } = this.state
 
+        let x = modalCharacter
         return (
              <div className="container">
-               <Table characterData={characters} removeCharacter={this.removeCharacter} />
+               <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}  openModal={this.openModal} />
                <Form handleSubmit={this.handleSubmit} />
+              <MyModal show={showModal} newCharacter={setCharacter} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} 
+               task={x ? modalCharacter.task : ''} desc={x ? modalCharacter.desc : ''} priority={x ? modalCharacter.priority : ''} _id={x ? modalCharacter._id: ''}/>
              </div>
              )
    }

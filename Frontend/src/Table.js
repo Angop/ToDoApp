@@ -39,7 +39,7 @@ const TableBody = props => {
 
                       <Dropdown.Menu>
                         <Dropdown.Item onClick={() => props.removeCharacter(index)}>Delete</Dropdown.Item>
-                        <Dropdown.Item href="something">Edit Task</Dropdown.Item>
+                        <Dropdown.Item onClick={() => props.openModal(index)}>Edit Task</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                  </td>
@@ -51,12 +51,12 @@ const TableBody = props => {
 }
 
 const Table = props => {
-     const { characterData, removeCharacter } = props
+     const { characterData, removeCharacter, openModal} = props
 
      return (
             <table style={{width: '100%'}}>
               <TableHeader />
-              <TableBody characterData={characterData} removeCharacter={removeCharacter} />
+              <TableBody characterData={characterData} removeCharacter={removeCharacter} openModal={openModal}/>
             </table>
           )
 }
