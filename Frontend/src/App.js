@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Table from './Table'
 import Form from './Form'
-import myModal from './Modal';
+import MyModal from './Modal';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
@@ -41,11 +41,12 @@ class App extends Component {
    }
 
    openModal = index => {
-      this.setState({ showModal: true }, {modalCharacter: this.state.characters[index]});
+      const { characters } = this.state
+      this.setState({ modalCharacter: characters[index] }, {showModal: true });
    }
 
-   closeModal() {
-      this.setState({ showModal: false }, {modalCharacter: null});
+   closeModal = () => {
+      this.setState({ modalCharacter: null }, {showModal: false});
    }
 
    handleModalSubmit = character => {
@@ -126,7 +127,7 @@ class App extends Component {
              <div className="container">
                <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}  openModal={this.openModal} />
                <Form handleSubmit={this.handleSubmit} />
-               <myModal show={showModal} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} modalCharacter={modalCharacter} />
+               <MyModal show={showModal} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} modalCharacter={modalCharacter} />
              </div>
              )
    }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-class myModal extends Component {
+class MyModal extends Component {
 
      state = this.setInitialState()
 
@@ -85,4 +85,4 @@ class myModal extends Component {
             //      </div>
             //    </modal>
 
-export default myModal
+export default MyModal
