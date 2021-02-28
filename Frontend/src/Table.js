@@ -1,6 +1,7 @@
 import React from 'react'
 import { Dropdown } from 'react-bootstrap'
 import Checkbox from '@material-ui/core/Checkbox';
+import ProgressBar from 'react-bootstrap/ProgressBar'
 
 const Checkboxes = ({checked, cbOnChange})=> {
   const handleChange = (event) => {
@@ -23,19 +24,23 @@ const TableHeader = () => {
 	  return (
 		      <thead>
 		        <tr>
-              <th></th>
-		          <th></th>
-              <th></th>
+              <th>Select</th>
+	      <th>Tasks</th>
+              <th>Description</th>
+              <th>Type</th>
+              <th style={{width: '10%'}}>Priority</th>
               <th></th>
 		        </tr>
 		      </thead>
-		    )
+		    ) // style width ensures the priority bar displays correctly
 }
 
 const TableBody = props => {
 
     const rows = props.characterData.map((row, index) => {  
       let textLine = (row.checked === true ? 'line-through' : 'none')
+      let priBar = parseInt(row.priority) * 10
+      let priVar = (priBar > 66 ? "danger" : (priBar > 33 ? "warning" : "success"))
 		      return (
                <tr key={index}>
                  <td>
@@ -53,7 +58,14 @@ const TableBody = props => {
                     {row.desc}
                   </div>
                 </td>
-                
+
+                <td>
+                  <div style={{textDecorationLine: textLine}}>
+                    {row.type}
+                  </div>
+                </td>
+
+                 <td><ProgressBar striped variant={priVar} now={priBar} /></td>
                  <td>
                   <Dropdown>
                       <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -62,7 +74,7 @@ const TableBody = props => {
 
                       <Dropdown.Menu>
                         <Dropdown.Item onClick={() => props.removeCharacter(index)}>Delete</Dropdown.Item>
-                        <Dropdown.Item href="something">Edit Task</Dropdown.Item>
+                        <Dropdown.Item onClick={() => props.openModal(index)}>Edit Task</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                  </td>
@@ -73,16 +85,12 @@ const TableBody = props => {
 }
 
 const Table = props => {
-     const { characterData, removeCharacter, editChecked } = props
+     const { characterData, removeCharacter, openModal, editChecked} = props
 
      return (
-            
-            <table>
+            <table style={{width: '100%'}}>
               <TableHeader />
-              <TableBody characterData={characterData} removeCharacter={removeCharacter} editChecked={editChecked} />
-              
-              <TableHeader />
-              
+              <TableBody characterData={characterData} removeCharacter={removeCharacter} openModal={openModal} editChecked={editChecked}/>
             </table>
           )
 }

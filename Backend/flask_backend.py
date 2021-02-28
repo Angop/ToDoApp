@@ -20,8 +20,8 @@ CORS(app)
 def hello_world():
     return 'Hello, World!'
 
-
 @app.route('/users', methods=['GET', 'POST','DELETE', 'PUT'])
+
 def get_users():
    if request.method == 'GET':
       search_username = request.args.get('name')
@@ -52,12 +52,13 @@ def get_users():
       # 200 is the default code for a normal response
       return resp
 
-   #elif request.method == 'PUT':
-   #   userToPut = request.get_json()
-    #  putUser = User(userToPut)  
-     # putUser.edit() # db request to update user
-      #resp = jsonify(putUser), 201
-      #return resp
+   elif request.method == 'PUT':
+      userToPut = request.get_json()
+      # make DB request to add user
+      updatedUser= User(userToPut)
+      updatedUser.save()
+      resp = jsonify(updatedUser), 204
+      return resp
       
 @app.route('/users/<id>', methods=['GET'])
 
@@ -69,6 +70,13 @@ def get_user(id):
       else :
          return jsonify({"error": "User not found"}), 404
       
+def find_users_by_name(name):
+   subdict = {'users_list' : []}
+   for user in users['users_list']:
+      if user['name'] == name:
+         subdict['users_list'].append(user)
+   return subdict 
+
 def find_users_by_name_job(name,job):
    subdict = {'users_list' : []}
    for user in users['users_list']:
