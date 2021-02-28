@@ -4,7 +4,6 @@ class Form extends Component {
      initialState = {
             task: '',
             desc: '',
-            date: ""
           }
 
      state = this.initialState
@@ -15,7 +14,7 @@ class Form extends Component {
         this.setState({
                [name]: value,
              })
-   } 
+   }
 
    submitForm = () => {
         this.props.handleSubmit(this.state)
@@ -24,7 +23,7 @@ class Form extends Component {
 
 
    render() {
-        const { task, desc, date } = this.state;
+        const { task, desc } = this.state;
 
         return (
                <form>
@@ -42,14 +41,7 @@ class Form extends Component {
                    id="desc"
                    value={desc}
                    onChange={this.handleChange} />
-		 <label htmlFor="date">Due Date (optional)</label>
-                 <input
-                   type = "datetime-local"
-                   name = "date"
-                   id = "date"
-                   value={date}
-                   onChange={this.handleChange} />
-                   <input type="button" value="Submit" onClick={this.submitForm} />
+                  <input type="button" value="Submit" onClick={this.submitForm} />
                </form>
              );
    }
