@@ -67,6 +67,12 @@ const TableBody = props => {
         const date = new Date(row.date)
         const dayName = days[date.getDay()]
         const monthName = months[date.getMonth()]
+        var minutes = date.getMinutes()
+        var minuteString = minutes.toString()
+        if (minutes < 10){
+          const zero = '0'
+          minuteString = zero.concat(minuteString)
+        }
         var hour = date.getHours()
         var formattedHour = null
         if (hour > 11){
@@ -74,13 +80,13 @@ const TableBody = props => {
           if (hour == 0){
             hour = 12
           }
-          formattedHour = hour.toString().concat(':',date.getMinutes(),' PM')
+          formattedHour = hour.toString().concat(':',minuteString,' PM')
         }
         else{
           if (hour == 0){
             hour = 12
           }
-          formattedHour = hour.toString().concat(':',date.getMinutes(),' AM')
+          formattedHour = hour.toString().concat(':',minuteString,' AM')
         }
         formattedDate = dayName.concat(monthName,date.getDate(),', ',date.getFullYear(),' at ', formattedHour)//date.getHours(),":",date.getMinutes())
       }
