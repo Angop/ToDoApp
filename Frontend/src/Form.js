@@ -51,15 +51,15 @@ class Form extends Component {
                    id="desc"
                    value={desc}
                    onChange={this.handleChange} />
-		 <label htmlFor="date">Due Date (optional)</label>
+
+		             <label htmlFor="date">Due Date (optional)</label>
                  <input
                    type = "datetime-local"
                    name = "date"
                    id = "date"
                    value={date}
                    onChange={this.handleChange} />
-                   <input type="button" value="Submit" onClick={this.submitForm} />
-
+            
                  <label htmlFor="type">Type</label>
                  <select name="type" onChange={this.handleChange}>
                    <option selected disabled>Please choose...</option>  <option name="type" id="type" value="School">School</option>
