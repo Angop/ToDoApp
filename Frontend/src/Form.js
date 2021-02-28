@@ -4,7 +4,10 @@ class Form extends Component {
      initialState = {
             task: '',
             desc: '',
-            date: ""
+            date: "", 
+            checked: false,
+            type: '',
+            priority: '',
           }
 
      state = this.initialState
@@ -17,14 +20,19 @@ class Form extends Component {
              })
    } 
 
-   submitForm = () => {
+    submitForm = () => {
+      let nPriority = parseInt(this.state.priority)
+      if (nPriority !== NaN && nPriority > 0 && nPriority <= 10) { // Check that the priority is valid
         this.props.handleSubmit(this.state)
         this.setState(this.initialState)
+     }
+     else {
+         alert("Priority must be a number from 1 to 10.")
+     }
    }
 
-
    render() {
-        const { task, desc, date } = this.state;
+        const { task, desc, priority, date } = this.state;
 
         return (
                <form>
@@ -35,6 +43,7 @@ class Form extends Component {
                    id="task"
                    value={task}
                    onChange={this.handleChange} />
+
                  <label htmlFor="desc">Description</label>
                  <input
                    type="text"
@@ -50,6 +59,24 @@ class Form extends Component {
                    value={date}
                    onChange={this.handleChange} />
                    <input type="button" value="Submit" onClick={this.submitForm} />
+
+                 <label htmlFor="type">Type</label>
+                 <select name="type" onChange={this.handleChange}>
+                   <option selected disabled>Please choose...</option>  <option name="type" id="type" value="School">School</option>
+                   <option name="type" id="type" value="Work">Work</option>
+                   <option name="type" id="type" value="Errand">Errand</option>
+                   <option name="type" id="type" value="House Work">House Work</option>
+                   <option name="type" id="type" value="Other">Other</option>
+                 </select> 
+
+                 <label htmlFor="priority">Priority (Number 1-10)</label>
+                 <input
+                   type="text"
+                   name="priority"
+                   id="priority"
+                   value={priority}
+                   onChange={this.handleChange} />
+                  <input type="button" value="Submit" onClick={this.submitForm} />
                </form>
              );
    }

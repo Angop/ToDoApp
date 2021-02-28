@@ -1,18 +1,38 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Dropdown } from 'react-bootstrap'
-import Checkbox from './Checkbox'
+import Checkbox from '@material-ui/core/Checkbox';
+import ProgressBar from 'react-bootstrap/ProgressBar'
+
+const Checkboxes = ({checked, cbOnChange})=> {
+  const handleChange = (event) => {
+      cbOnChange(event.target.checked);
+  };
+
+  return (
+    <div>
+      <Checkbox
+        onChange={handleChange}
+        checked={checked}
+        color="primary"
+        inputProps={{ 'aria-label': 'primary checkbox' }}
+      />
+      </div>
+  );
+}
 
 const TableHeader = () => {
 	  return (
 		      <thead>
 		        <tr>
-              <th></th>
-		          <th>Task</th>
-              <th></th>
+              <th>Select</th>
+	      <th>Tasks</th>
+              <th>Description</th>
+              <th>Type</th>
+              <th style={{width: '10%'}}>Priority</th>
               <th></th>
 		        </tr>
 		      </thead>
-		    )
+		    ) // style width ensures the priority bar displays correctly
 }
 
 const days = [
@@ -64,14 +84,34 @@ const TableBody = props => {
         }
         formattedDate = dayName.concat(monthName,date.getDate(),', ',date.getFullYear(),' at ', formattedHour)//date.getHours(),":",date.getMinutes())
       }
+      let textLine = (row.checked === true ? 'line-through' : 'none')
+      let priBar = parseInt(row.priority) * 10
+      let priVar = (priBar > 66 ? "danger" : (priBar > 33 ? "warning" : "success"))
 		      return (
                <tr key={index}>
                  <td>
-                   <Checkbox />
+                    <Checkboxes cbOnChange={(checked)=> props.editChecked(index)} />
                  </td>
-                 <td>{row.task}</td>
-                 <td>{row.desc}</td>
-                 <td>{formattedDate}</td>
+                 
+                 <td>
+                  <div style={{textDecorationLine: textLine}}>
+                    {row.task}
+                  </div>
+                 </td>
+
+                 <td>
+                  <div style={{textDecorationLine: textLine}}>
+                    {row.desc}
+                  </div>
+                </td>
+
+                <td>
+                  <div style={{textDecorationLine: textLine}}>
+                    {row.type}
+                  </div>
+                </td>
+                <td>{formattedDate}</td>
+                 <td><ProgressBar striped variant={priVar} now={priBar} /></td>
                  <td>
                   <Dropdown>
                       <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -80,24 +120,23 @@ const TableBody = props => {
 
                       <Dropdown.Menu>
                         <Dropdown.Item onClick={() => props.removeCharacter(index)}>Delete</Dropdown.Item>
-                        <Dropdown.Item href="something">Edit Task</Dropdown.Item>
+                        <Dropdown.Item onClick={() => props.openModal(index)}>Edit Task</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                  </td>
                </tr>
 			          )
 		    })
-
 	  return <tbody>{rows}</tbody>
 }
 
 const Table = props => {
-     const { characterData, removeCharacter } = props
+     const { characterData, removeCharacter, openModal, editChecked} = props
 
      return (
-            <table>
+            <table style={{width: '100%'}}>
               <TableHeader />
-              <TableBody characterData={characterData} removeCharacter={removeCharacter} />
+              <TableBody characterData={characterData} removeCharacter={removeCharacter} openModal={openModal} editChecked={editChecked}/>
             </table>
           )
 }
