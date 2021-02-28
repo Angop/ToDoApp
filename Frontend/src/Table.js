@@ -1,13 +1,30 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Dropdown } from 'react-bootstrap'
-import Checkbox from './Checkbox'
+import Checkbox from '@material-ui/core/Checkbox';
+
+const Checkboxes = ({checked, cbOnChange})=> {
+  const handleChange = (event) => {
+      cbOnChange(event.target.checked);
+  };
+
+  return (
+    <div>
+      <Checkbox
+        onChange={handleChange}
+        checked={checked}
+        color="primary"
+        inputProps={{ 'aria-label': 'primary checkbox' }}
+      />
+      </div>
+  );
+}
 
 const TableHeader = () => {
 	  return (
 		      <thead>
 		        <tr>
               <th></th>
-		          <th>Task</th>
+		          <th></th>
               <th></th>
               <th></th>
 		        </tr>
@@ -16,14 +33,27 @@ const TableHeader = () => {
 }
 
 const TableBody = props => {
-	  const rows = props.characterData.map((row, index) => {
+
+    const rows = props.characterData.map((row, index) => {  
+      let textLine = (row.checked === true ? 'line-through' : 'none')
 		      return (
                <tr key={index}>
                  <td>
-                   <Checkbox />
+                    <Checkboxes cbOnChange={(checked)=> props.editChecked(index)} />
                  </td>
-                 <td>{row.task}</td>
-                 <td>{row.desc}</td>
+                 
+                 <td>
+                  <div style={{textDecorationLine: textLine}}>
+                    {row.task}
+                  </div>
+                 </td>
+
+                 <td>
+                  <div style={{textDecorationLine: textLine}}>
+                    {row.desc}
+                  </div>
+                </td>
+                
                  <td>
                   <Dropdown>
                       <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -39,17 +69,20 @@ const TableBody = props => {
                </tr>
 			          )
 		    })
-
 	  return <tbody>{rows}</tbody>
 }
 
 const Table = props => {
-     const { characterData, removeCharacter } = props
+     const { characterData, removeCharacter, editChecked } = props
 
      return (
+            
             <table>
               <TableHeader />
-              <TableBody characterData={characterData} removeCharacter={removeCharacter} />
+              <TableBody characterData={characterData} removeCharacter={removeCharacter} editChecked={editChecked} />
+              
+              <TableHeader />
+              
             </table>
           )
 }

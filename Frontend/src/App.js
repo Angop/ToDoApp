@@ -52,7 +52,33 @@ class App extends Component {
    }
 
    handleSubmit = character => {
+      console.log(character)
       this.makePostCall(character).then( callResult => {
+         if (callResult.status === 201) {
+            character = callResult.data;
+            console.log(character);
+            this.setState({ characters: [...this.state.characters, character] });
+         }
+      });
+   }
+
+   editChecked = index => {
+      const { characters } = this.state
+      let character = characters[index]; 
+      character.checked = !character.checked
+
+      console.log(character)
+      
+      if(this.makePostCall(character)){
+         characters[index] = character
+         this.setState({
+            characters 
+         })
+      }
+   }
+
+   handlePatch = character => {
+      this.makePatchCall(character).then( callResult => {
          if (callResult.status === 201) {
             character = callResult.data;
             console.log(character);
@@ -64,7 +90,6 @@ class App extends Component {
    handleCompletedSubmit = complete => {
       this.setState({ completed: [...this.state.completed, complete]});
    }
-
 
    makePostCall(character){
       return axios.post('http://localhost:5000/users', character)
@@ -83,13 +108,12 @@ class App extends Component {
 
         return (
              <div className="container">
-               <Table characterData={characters} removeCharacter={this.removeCharacter} />
+               <Table characterData={characters} removeCharacter={this.removeCharacter} editChecked={this.editChecked} />
                <Form handleSubmit={this.handleSubmit} />
              </div>
              )
    }
 
 }
-
 
 export default App

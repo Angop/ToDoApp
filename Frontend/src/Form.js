@@ -4,6 +4,7 @@ class Form extends Component {
      initialState = {
             task: '',
             desc: '',
+            checked: true
           }
 
      state = this.initialState
