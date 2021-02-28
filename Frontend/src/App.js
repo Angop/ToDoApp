@@ -65,13 +65,15 @@ class App extends Component {
       if(this.makePutCall(character)){
          var updatedCharacters = []
          for (let i=0; i<characters.length; i++) { // get an updated character list
-            if (character._id == characters[i]._id) {
+            if (character._id === characters[i]._id) {
                updatedCharacters.push(character)
             }
             else {
                updatedCharacters.push(characters[i])
             }
          }
+         console.log(characters)
+         console.log(updatedCharacters)
          this.setState({
             characters: updatedCharacters
          })
@@ -134,7 +136,6 @@ class App extends Component {
    render() {
         const { characters, showModal, setCharacter, modalCharacter } = this.state
 
-        let x = modalCharacter
         return (
              <div className="container">
                <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}  openModal={this.openModal} />
