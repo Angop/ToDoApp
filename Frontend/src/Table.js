@@ -28,8 +28,8 @@ const TableHeader = () => {
 	      <th>Tasks</th>
               <th>Description</th>
               <th>Type</th>
+              <th>Date</th>
               <th style={{width: '10%'}}>Priority</th>
-              <th></th>
 		        </tr>
 		      </thead>
 		    ) // style width ensures the priority bar displays correctly
