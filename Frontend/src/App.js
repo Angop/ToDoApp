@@ -107,7 +107,33 @@ class App extends Component {
    }
 
    handleSubmit = character => {
+      console.log(character)
       this.makePostCall(character).then( callResult => {
+         if (callResult.status === 201) {
+            character = callResult.data;
+            console.log(character);
+            this.setState({ characters: [...this.state.characters, character] });
+         }
+      });
+   }
+
+   editChecked = index => {
+      const { characters } = this.state
+      let character = characters[index]; 
+      character.checked = !character.checked
+
+      console.log(character)
+      
+      if(this.makePostCall(character)){
+         characters[index] = character
+         this.setState({
+            characters 
+         })
+      }
+   }
+
+   handlePatch = character => {
+      this.makePatchCall(character).then( callResult => {
          if (callResult.status === 201) {
             character = callResult.data;
             console.log(character);
@@ -119,7 +145,6 @@ class App extends Component {
    handleCompletedSubmit = complete => {
       this.setState({ completed: [...this.state.completed, complete]});
    }
-
 
    makePostCall(character){
       return axios.post('http://localhost:5000/users', character)
@@ -138,7 +163,7 @@ class App extends Component {
 
         return (
              <div className="container">
-               <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}  openModal={this.openModal} />
+               <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}  openModal={this.openModal} editChecked={this.editChecked} />
                <Form handleSubmit={this.handleSubmit} />
               <MyModal show={showModal} newCharacter={setCharacter} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} 
               modalCharacter={modalCharacter}/>
@@ -147,7 +172,6 @@ class App extends Component {
    }
 
 }
-
 
 export default App
                // task=x ? modalCharacter.task : '' desc=x ? modalCharacter.desc : '' priority=x ? modalCharacter.priority : '' _id=x ? modalCharacter._id: ''

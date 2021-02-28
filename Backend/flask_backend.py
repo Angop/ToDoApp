@@ -5,10 +5,6 @@ import json
 # for linking frontend-backend
 from flask_cors import CORS
 
-# for random ids 
-# import random 
-# import string
-
 # for mongo db
 from mongo_database import User
 
@@ -23,15 +19,9 @@ CORS(app)
 
 def hello_world():
     return 'Hello, World!'
-    
-# def gen_random_id():
-#   random_id = ''.join([random.choice(string.ascii_letters 
-#            + string.digits) for n in range(6)]) 
-#   print (random_id)
-#   return random_id
 
+@app.route('/users', methods=['GET', 'POST','DELETE', 'PUT'])
 
-@app.route('/users', methods=['GET', 'POST','DELETE','PUT'])
 def get_users():
    if request.method == 'GET':
       search_username = request.args.get('name')
@@ -47,23 +37,8 @@ def get_users():
          users = User().find_all()
       return {"users_list": users}
 
-
-      # if search_username and search_job :
-      #    return find_users_by_name_job(search_username, search_job) 
-      # elif search_username  :
-      #    users = User().find_by_name(search_username)
-      # elif search_job  :
-      #    return find_users_by_job(search_job) 
-      # else:
-      #    users = User().find_all()
-      # return {"users_list": users}
-
    elif request.method == 'POST':
       userToAdd = request.get_json()
-      # userToAdd['id'] = gen_random_id() # check for duplicate before appending.. todo
-      # users['users_list'].append(userToAdd)
-
-      # make DB request to add user
       newUser = User(userToAdd)
       newUser.save()
       resp = jsonify(newUser), 201
@@ -73,7 +48,6 @@ def get_users():
       userToDelete = request.get_json()
       remUser = User(userToDelete)
       resp = remUser.remove() # db request to remove user
-      # users['users_list'].remove(userToDelete)
       resp = jsonify(remUser), 200
       # 200 is the default code for a normal response
       return resp

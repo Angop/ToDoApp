@@ -4,6 +4,7 @@ class Form extends Component {
      initialState = {
             task: '',
             desc: '',
+            checked: false,
             type: '',
             priority: '',
           }

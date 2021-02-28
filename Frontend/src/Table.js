@@ -1,7 +1,24 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Dropdown } from 'react-bootstrap'
-import Checkbox from './Checkbox'
+import Checkbox from '@material-ui/core/Checkbox';
 import ProgressBar from 'react-bootstrap/ProgressBar'
+
+const Checkboxes = ({checked, cbOnChange})=> {
+  const handleChange = (event) => {
+      cbOnChange(event.target.checked);
+  };
+
+  return (
+    <div>
+      <Checkbox
+        onChange={handleChange}
+        checked={checked}
+        color="primary"
+        inputProps={{ 'aria-label': 'primary checkbox' }}
+      />
+      </div>
+  );
+}
 
 const TableHeader = () => {
 	  return (
@@ -19,17 +36,35 @@ const TableHeader = () => {
 }
 
 const TableBody = props => {
-	  const rows = props.characterData.map((row, index) => {
+
+    const rows = props.characterData.map((row, index) => {  
+      let textLine = (row.checked === true ? 'line-through' : 'none')
       let priBar = parseInt(row.priority) * 10
       let priVar = (priBar > 66 ? "danger" : (priBar > 33 ? "warning" : "success"))
 		      return (
                <tr key={index}>
                  <td>
-                   <Checkbox />
+                    <Checkboxes cbOnChange={(checked)=> props.editChecked(index)} />
                  </td>
-                 <td>{row.task}</td>
-                 <td>{row.desc}</td>
-                 <td>{row.type}</td>
+                 
+                 <td>
+                  <div style={{textDecorationLine: textLine}}>
+                    {row.task}
+                  </div>
+                 </td>
+
+                 <td>
+                  <div style={{textDecorationLine: textLine}}>
+                    {row.desc}
+                  </div>
+                </td>
+
+                <td>
+                  <div style={{textDecorationLine: textLine}}>
+                    {row.type}
+                  </div>
+                </td>
+
                  <td><ProgressBar striped variant={priVar} now={priBar} /></td>
                  <td>
                   <Dropdown>
@@ -46,17 +81,16 @@ const TableBody = props => {
                </tr>
 			          )
 		    })
-
 	  return <tbody>{rows}</tbody>
 }
 
 const Table = props => {
-     const { characterData, removeCharacter, openModal} = props
+     const { characterData, removeCharacter, openModal, editChecked} = props
 
      return (
             <table style={{width: '100%'}}>
               <TableHeader />
-              <TableBody characterData={characterData} removeCharacter={removeCharacter} openModal={openModal}/>
+              <TableBody characterData={characterData} removeCharacter={removeCharacter} openModal={openModal} editChecked={editChecked}/>
             </table>
           )
 }
