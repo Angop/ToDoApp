@@ -3,8 +3,9 @@ import axios from 'axios'
 import Table from './Table'
 import Form from './Form'
 import MyModal from './Modal';
+import logo from './logo.jpg';
+import "./styles.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
-
 
 class App extends Component {
 	  state = {
@@ -162,16 +163,24 @@ class App extends Component {
         const { characters, showModal, setCharacter, modalCharacter } = this.state
 
         return (
-             <div className="container">
+         <div className="all">
+
+            <div className="header">
+               <img className="photo" src={logo} /> 
+               <h1 className="text"> TO-DO APP </h1>
+            </div>
+
+            <div className="container">
                <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}  openModal={this.openModal} editChecked={this.editChecked} />
                <Form handleSubmit={this.handleSubmit} />
-              <MyModal show={showModal} newCharacter={setCharacter} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} 
-              modalCharacter={modalCharacter}/>
-             </div>
+               <MyModal show={showModal} newCharacter={setCharacter} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} 
+               modalCharacter={modalCharacter}/>
+            </div>
+
+         </div>
              )
    }
 
 }
 
 export default App
-               // task=x ? modalCharacter.task : '' desc=x ? modalCharacter.desc : '' priority=x ? modalCharacter.priority : '' _id=x ? modalCharacter._id: ''

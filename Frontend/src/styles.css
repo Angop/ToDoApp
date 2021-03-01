@@ -1,0 +1,22 @@
+.photo {
+    height: 80px;
+    width: 80px;
+    float: left
+  }
+
+.text {
+    padding: 19px
+}
+
+.all {
+    
+}
+
+.header {
+    margin-top: 0px;
+    text-align: left;       
+    background-color:white;
+    float: center;
+    width: 100%;
+    height: 80px;
+}
