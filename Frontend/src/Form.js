@@ -4,6 +4,8 @@ class Form extends Component {
      initialState = {
             task: '',
             desc: '',
+            date: "", 
+            checked: false,
             type: '',
             priority: '',
           }
@@ -16,7 +18,7 @@ class Form extends Component {
         this.setState({
                [name]: value,
              })
-   }
+   } 
 
     submitForm = () => {
       let nPriority = parseInt(this.state.priority)
@@ -29,9 +31,8 @@ class Form extends Component {
      }
    }
 
-
-    render() {
-        const { task, desc, priority } = this.state;
+   render() {
+        const { task, desc, priority, date } = this.state;
 
         return (
                <form>
@@ -51,6 +52,14 @@ class Form extends Component {
                    value={desc}
                    onChange={this.handleChange} />
 
+		             <label htmlFor="date">Due Date (optional)</label>
+                 <input
+                   type = "datetime-local"
+                   name = "date"
+                   id = "date"
+                   value={date}
+                   onChange={this.handleChange} />
+            
                  <label htmlFor="type">Type</label>
                  <select name="type" onChange={this.handleChange}>
                    <option selected disabled>Please choose...</option>  <option name="type" id="type" value="School">School</option>
