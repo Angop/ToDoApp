@@ -12,7 +12,6 @@ class App extends Component {
         characters: [],
         completed:[],
         showModal: false,
-        setCharacter: false, // tells modal.js it has a new character
         modalCharacter: null
      }
 
@@ -43,10 +42,16 @@ class App extends Component {
    }
 
    openModal = index => {
-      const { characters } = this.state
-      this.setState({ modalCharacter: characters[index] });
+      if (index > 0) {
+         const { characters } = this.state
+         this.setState({ modalCharacter: characters[index] });
+         this.setState({ showModal: true });
+      }
+   }
+
+   newCharacter = () => { // opens modal for a new character
+      this.setState({ modalCharacter: null });
       this.setState({ showModal: true });
-      this.setState({ setCharacter : true });
    }
 
    closeModal = () => {
@@ -160,7 +165,7 @@ class App extends Component {
    }
 
    render() {
-        const { characters, showModal, setCharacter, modalCharacter } = this.state
+        const { characters, showModal, modalCharacter } = this.state
 
         return (
          <div className="all">
@@ -171,9 +176,10 @@ class App extends Component {
             </div>
 
             <div className="container">
+               <input type="button" value="Add Character" onClick={this.newCharacter} />
                <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}  openModal={this.openModal} editChecked={this.editChecked} />
                <Form handleSubmit={this.handleSubmit} />
-               <MyModal show={showModal} newCharacter={setCharacter} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} 
+               <MyModal show={showModal} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} 
                modalCharacter={modalCharacter}/>
             </div>
 
