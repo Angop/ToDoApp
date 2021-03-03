@@ -1,9 +1,9 @@
+*.json
+*.json
+Frontend/package.json
+Frontend/package-lock.json
+Frontend/.eslintcache
 
-*.json
-*.json
-Frontend/package.json
-Frontend/package-lock.json
-Frontend/.eslintcache
-Frontend/package.json
-Frontend/package-lock.json
-Frontend/.eslintcache
+Frontend/node_modules
+node_modules
+Backend/node_modules
