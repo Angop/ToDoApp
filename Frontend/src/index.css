@@ -25,6 +25,10 @@ html {
   /* 1 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
+  margin: 0;
+  padding: 0;
+  height: 100%; 
+  width: 100%
 }
 
 /* Sections
@@ -34,6 +38,10 @@ html {
  */
 body {
   margin: 0;
+  padding: 0;
+  overflow: auto;
+  height: 100%; 
+  width: 100%;
 }
 
 /**
@@ -49,7 +57,7 @@ main {
  */
 h1 {
   font-size: 2em;
-  margin: 0.67em 0;
+  margin-top: 0;
 }
 
 /* Grouping content
@@ -65,6 +73,7 @@ hr {
   /* 1 */
   overflow: visible;
   /* 2 */
+  margin-top: 0;
 }
 
 /**
