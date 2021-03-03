@@ -24,17 +24,7 @@ def hello_world():
 
 def get_users():
    if request.method == 'GET':
-      search_username = request.args.get('name')
-      search_job = request.args.get('job')
-      users = []
-
-      if search_username:
-         users.extend(User().find_by_name(search_username))
-      if search_job:
-         users.extend(User().find_by_job(search_job))
-      # remove duplicate users (matched user and job)?? dd
-      if not search_username and not search_job:
-         users = User().find_all()
+      users = User().find_all()
       return {"users_list": users}
 
    elif request.method == 'POST':
@@ -59,34 +49,3 @@ def get_users():
       updatedUser.save()
       resp = jsonify(updatedUser), 204
       return resp
-      
-@app.route('/users/<id>', methods=['GET'])
-
-def get_user(id):
-   if request.method == 'GET':
-      user = User({"_id":id})
-      if user.reload() :
-         return user
-      else :
-         return jsonify({"error": "User not found"}), 404
-      
-def find_users_by_name(name):
-   subdict = {'users_list' : []}
-   for user in users['users_list']:
-      if user['name'] == name:
-         subdict['users_list'].append(user)
-   return subdict 
-
-def find_users_by_name_job(name,job):
-   subdict = {'users_list' : []}
-   for user in users['users_list']:
-      if user['name'] == name and user['job'] == job:
-         subdict['users_list'].append(user)
-   return subdict 
-
-def find_users_by_job(job):
-   subdict = {'users_list' : []}
-   for user in users['users_list']:
-      if user['job'] == job:
-         subdict['users_list'].append(user)
-   return subdict 

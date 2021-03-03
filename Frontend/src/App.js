@@ -127,9 +127,7 @@ class App extends Component {
       
       if(this.makePostCall(character)){
          characters[index] = character
-         this.setState({
-            characters 
-         })
+         this.setState({ characters })
       }
    }
 
@@ -167,7 +165,7 @@ class App extends Component {
 
             <div className="header">
                <img className="photo" src={logo} /> 
-               <h1 className="text"> TO-DO APP </h1>
+               <h2 className="text"> TO-DO APP </h2>
             </div>
 
             <div className="container">
@@ -175,8 +173,7 @@ class App extends Component {
                <Form handleSubmit={this.handleSubmit} />
                <MyModal show={showModal} newCharacter={setCharacter} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} 
                modalCharacter={modalCharacter}/>
-            </div>
-
+            </div>   
          </div>
              )
    }
