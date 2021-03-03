@@ -61,7 +61,19 @@ class App extends Component {
 
    handleModalSubmit = character => {
       // this.handleSubmit(character);
-      this.updateCharacter(character)
+      console.log(character)
+      if (this.state.modalCharacter) { // updating existing character
+         this.updateCharacter(character)
+      }
+      else { // creating a new character
+         this.makePostCall(character).then( callResult => {
+            if (callResult.status === 201) {
+               character = callResult.data;
+               console.log(character);
+               this.setState({ characters: [...this.state.characters, character] });
+            }
+         });
+      }
       this.closeModal()
    }
 

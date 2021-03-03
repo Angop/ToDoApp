@@ -24,7 +24,7 @@ class MyModal extends Component {
    }
 
    // TODO: fix double click bug (if you edit the same task twice this breaks)
-   componentDidUpdate({_id, modalCharacter}) { // if a new character is given, change the state
+   componentDidUpdate({_id}) { // if a new character is given, change the state
     if (this.props.modalCharacter && (this.props.modalCharacter._id !== this.state._id)) {
       this.setState({task: this.props.modalCharacter.task})
       this.setState({desc: this.props.modalCharacter.desc})
@@ -34,7 +34,6 @@ class MyModal extends Component {
       this.setState({_id: this.props.modalCharacter._id})
     }
     // if (this.props.modalCharacter === null) { // if a null character is given, reset to initial to create a new character
-    //   this.setState(this.initialState)
     // }
    }
 
@@ -43,16 +42,17 @@ class MyModal extends Component {
      if (nPriority !== NaN && nPriority > 0 && nPriority <= 10) { // Check that the priority is valid
       if (this.props.modalCharacter) {
         var modChar = this.props.modalCharacter
-        }
-        else{
-          var modChar = {}
-        }
+      }
+      else{
+        var modChar = {}
+      }
         modChar.task = this.state.task
         modChar.desc = this.state.desc
         modChar.priority = this.state.priority
         modChar.type = this.state.type
         modChar.date = this.state.date
         this.props.handleModalSubmit(modChar)
+        this.setState(this.initialState)
      }
      else {
       alert("Priority must be a number from 1 to 10.")
