@@ -15,9 +15,9 @@ Go to https://nodejs.org/en/download/ to install node.js.
 
 Pull from the main github branch then go into the Frontend folder in a command prompt. Install npm with the line "npm install". 
 You may need to add package.json and package-lock.json first. Next run the following lines to install necessary libraries:
-  npm install flask_cors
-  npm install react-bootstrap bootstrap
-  npm install @material-ui/core
+  "npm install flask_cors"
+  "npm install react-bootstrap bootstrap"
+  "npm install @material-ui/core"
 
 To start up the app:
 Boot up mongo.exe -> use users
