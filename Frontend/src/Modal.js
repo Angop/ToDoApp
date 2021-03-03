@@ -40,7 +40,7 @@ class MyModal extends Component {
         modChar.priority = this.state.priority
         this.props.handleModalSubmit(modChar)
         }
-        this.setState(this.initialState)
+        // this.setState(this.initialState)
      }
      else {
       alert("Priority must be a number from 1 to 10.")
