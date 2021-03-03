@@ -42,10 +42,6 @@ class MyModal extends Component {
      if (nPriority !== NaN && nPriority > 0 && nPriority <= 10) { // Check that the priority is valid
       if (this.props.modalCharacter) {
         var modChar = this.props.modalCharacter
-      }
-      else{
-        var modChar = {}
-      }
         modChar.task = this.state.task
         modChar.desc = this.state.desc
         modChar.priority = this.state.priority
@@ -58,6 +54,7 @@ class MyModal extends Component {
       alert("Priority must be a number from 1 to 10.")
      }
     }
+  }
 
     render = () => {
 

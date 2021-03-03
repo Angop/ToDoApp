@@ -33,7 +33,6 @@ class Form extends Component {
 
    render() {
         const { task, desc, priority, date } = this.state;
-
         return (
                <form>
                  <label htmlFor="task">Task</label>

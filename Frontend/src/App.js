@@ -179,6 +179,17 @@ class App extends Component {
    render() {
         const { characters, showModal, modalCharacter } = this.state
 
+        let mChar = {}
+        if (modalCharacter === null) {
+            mChar = {
+            task: '',
+            desc: '',
+            priority: '',
+            date: "", 
+            checked: false,
+            type: '',
+            }
+        }
         return (
          <div className="all">
 
@@ -190,9 +201,8 @@ class App extends Component {
             <div className="container">
                <input type="button" value="Add Character" onClick={this.newCharacter} />
                <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}  openModal={this.openModal} editChecked={this.editChecked} />
-               <Form handleSubmit={this.handleSubmit} />
                <MyModal show={showModal} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} 
-               modalCharacter={modalCharacter}/>
+               modalCharacter={(modalCharacter ? modalCharacter : mChar)}/>
             </div>
 
          </div>
@@ -202,3 +212,4 @@ class App extends Component {
 }
 
 export default App
+               // <Form handleSubmit={this.handleSubmit} />
