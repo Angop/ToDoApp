@@ -77,13 +77,13 @@ const TableBody = props => {
         var formattedHour = null
         if (hour > 11){
           hour = hour - 12
-          if (hour == 0){
+          if (hour === 0){
             hour = 12
           }
           formattedHour = hour.toString().concat(':',minuteString,' PM')
         }
         else{
-          if (hour == 0){
+          if (hour === 0){
             hour = 12
           }
           formattedHour = hour.toString().concat(':',minuteString,' AM')
