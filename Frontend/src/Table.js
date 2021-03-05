@@ -27,6 +27,7 @@ const TableHeader = () => {
               <th>Select</th>
 	      <th>Tasks</th>
               <th>Description</th>
+              <th>Due Date</th>
               <th>Type</th>
               <th style={{width: '10%'}}>Priority</th>
               <th></th>
@@ -64,13 +65,12 @@ const TableBody = props => {
                     {row.desc}
                   </div>
                 </td>
-
+                <td>{formattedDate}</td>
                 <td>
                   <div style={{textDecorationLine: textLine}}>
                     {row.type}
                   </div>
                 </td>
-                <td>{formattedDate}</td>
                  <td><ProgressBar striped variant={priVar} now={priBar} /></td>
                  <td>
                   <Dropdown>
