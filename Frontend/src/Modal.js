@@ -39,7 +39,7 @@ class MyModal extends Component {
 
    submitForm = () => {
      let nPriority = parseInt(this.state.priority)
-     if (nPriority !== NaN && nPriority > 0 && nPriority <= 10) { // Check that the priority is valid
+     if (nPriority !== NaN && nPriority >= 0 && nPriority <= 10) { // Check that the priority is valid
       if (this.props.modalCharacter) {
         var modChar = this.props.modalCharacter
         modChar.task = this.state.task
@@ -102,13 +102,19 @@ class MyModal extends Component {
                    <option name="type" id="type" value="Other">Other</option>
                  </select> 
 
-                 <label htmlFor="priority">Priority (Number 1-10)</label>
-                 <input
-                   type="text"
-                   name="priority"
-                   id="priority"
-                   value={this.state.priority}
-                   onChange={this.handleChange} />
+                 <label htmlFor="priority">Priority (Number 0-10)</label>
+                 <div className="slider-parent">
+                   <input
+                     type="range"
+                     name="priority"
+                     id="priority"
+                     min="0"
+                     max="10"
+                     steps="1"
+                     value={this.state.priority}
+                     onChange={this.handleChange} />
+                  <output>{this.state.priority}</output>
+                </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.props.closeModal}>
@@ -125,3 +131,11 @@ class MyModal extends Component {
 }
 
 export default MyModal
+
+                //  <label htmlFor="priority">Priority (Number 1-10)</label>
+                //  <input
+                //    type="text"
+                //    name="priority"
+                //    id="priority"
+                //    value={this.state.priority}
+                //    onChange={this.handleChange} />
