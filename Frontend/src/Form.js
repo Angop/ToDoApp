@@ -23,11 +23,20 @@ class Form extends Component {
     submitForm = () => {
       let nPriority = parseInt(this.state.priority)
       if (nPriority !== NaN && nPriority > 0 && nPriority <= 10) { // Check that the priority is valid
-        this.props.handleSubmit(this.state)
-        this.setState(this.initialState)
+        /*this.props.handleSubmit(this.state)
+        this.setState(this.initialState)*/
      }
      else {
          alert("Priority must be a number from 1 to 10.")
+     }
+     var date = new Date(this.state.date)
+     let year = date.getFullYear()
+     if (year !== NaN && ((year % 1000) < 10) && year >= 2021){
+       this.props.handleSubmit(this.state)
+       this.setState(this.initialState)
+     }
+     else {
+       alert("Year must be a valid 4-digit date in the future.")
      }
    }
 
@@ -54,7 +63,7 @@ class Form extends Component {
 
 		             <label htmlFor="date">Due Date (optional)</label>
                  <input
-                   type = "datetime-local"
+                   type = "date"
                    name = "date"
                    id = "date"
                    value={date}

@@ -28,6 +28,7 @@ const TableHeader = () => {
               <th>Complete?</th>
 	            <th>Task Title</th>
               <th>Description</th>
+              <th>Due Date</th>
               <th>Type</th>
               <th>Date</th>
               <th style={{width: '10%'}}>Priority</th>
@@ -36,60 +37,14 @@ const TableHeader = () => {
 		    ) // style width ensures the priority bar displays correctly
 }
 
-const days = [
-  'Sunday ',
-  'Monday ',
-  'Tuesday ',
-  'Wednesday ',
-  'Thursday ',
-  'Friday ',
-  'Saturday '
-]
-
-const months = [
-  'January ',
-  'February ',
-  'March ',
-  'April ',
-  'May ',
-  'June ',
-  'July ',
-  'August ',
-  'September ',
-  'October ',
-  'November ',
-  'December '
-]
-
 const TableBody = props => {
 	  const rows = props.characterData.map((row, index) => {
       var formattedDate = null
       if (row.date.length && row.date.length > 0){
         const date = new Date(row.date)
-        const dayName = days[date.getDay()]
-        const monthName = months[date.getMonth()]
-        var minutes = date.getMinutes()
-        var minuteString = minutes.toString()
-        if (minutes < 10){
-          const zero = '0'
-          minuteString = zero.concat(minuteString)
-        }
-        var hour = date.getHours()
-        var formattedHour = null
-        if (hour > 11){
-          hour = hour - 12
-          if (hour == 0){
-            hour = 12
-          }
-          formattedHour = hour.toString().concat(':',minuteString,' PM')
-        }
-        else{
-          if (hour == 0){
-            hour = 12
-          }
-          formattedHour = hour.toString().concat(':',minuteString,' AM')
-        }
-        formattedDate = dayName.concat(monthName,date.getDate(),', ',date.getFullYear(),' at ', formattedHour)//date.getHours(),":",date.getMinutes())
+        const month = date.getMonth() + 1
+
+        formattedDate = month.toString().concat('/',date.getDate(),'/',date.getFullYear())
       }
       let textLine = (row.checked === true ? 'line-through' : 'none')
       let priBar = parseInt(row.priority) * 10
@@ -114,19 +69,12 @@ const TableBody = props => {
                     {row.desc}
                   </div>
                 </td>
-
+                <td>{formattedDate}</td>
                 <td>
                   <div style={{textDecorationLine: textLine}}>
                     {row.type}
                   </div>
                 </td>
-
-                <td>
-                  <div style={{textDecorationLine: textLine}}>
-                    {formattedDate}
-                  </div>
-                </td>
-
                  <td><ProgressBar striped variant={priVar} now={priBar} /></td>
                  <td>
                   <Dropdown>
