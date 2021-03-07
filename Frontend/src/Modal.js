@@ -86,7 +86,7 @@ class MyModal extends Component {
 
 		             <label htmlFor="date">Due Date (optional)</label>
                  <input
-                   type = "datetime-local"
+                   type = "date"
                    name = "date"
                    id = "date"
                    value={this.state.date}
