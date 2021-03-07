@@ -1,9 +1,7 @@
 .photo {
     height: 80px;
     width: 80px;
-    float: left;
-    padding: 10px;
-    margin-left: 10px;
+    float: left
   }
 
 .text {
@@ -11,19 +9,14 @@
 }
 
 .all {
-    margin: 0 !important;
-    margin-top: 0;
-    padding: 0 !important;  
-    overflow: auto;
-    height: 100%; 
-    width: 100%;
+    
 }
 
 .header {
-    margin: 0 !important;
-    padding: 0 !important;
-    text-align: left;     
+    margin-top: 0px;
+    text-align: left;       
+    background-color:white;
     float: center;
     width: 100%;
-    height: 120px;
+    height: 80px;
 }

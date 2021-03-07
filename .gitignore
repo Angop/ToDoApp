@@ -1,11 +1,9 @@
+
 *.json
 *.json
 Frontend/package.json
 Frontend/package-lock.json
 Frontend/.eslintcache
-
-Frontend/node_modules
-node_modules
-Backend/node_modules
-Backend/__pycache__/flask_backend.cpython-39.pyc
-Backend/__pycache__/mongo_database.cpython-39.pyc
+Frontend/package.json
+Frontend/package-lock.json
+Frontend/.eslintcache
