@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Table from './Table'
-import Form from './Form'
 import MyModal from './Modal';
 import logo from './logo.jpg';
 import "./styles.css";
