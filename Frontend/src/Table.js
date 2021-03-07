@@ -3,9 +3,10 @@ import { Dropdown } from 'react-bootstrap'
 import Checkbox from '@material-ui/core/Checkbox';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 
-const Checkboxes = ({checked, cbOnChange})=> {
+const Checkboxes = ({checked, cbOnChange })=> {
   const handleChange = (event) => {
       cbOnChange(event.target.checked);
+      
   };
 
   return (
@@ -24,8 +25,8 @@ const TableHeader = () => {
 	  return (
 		      <thead>
 		        <tr>
-              <th>Select</th>
-	      <th>Tasks</th>
+              <th>Complete?</th>
+	            <th>Task Title</th>
               <th>Description</th>
               <th>Due Date</th>
               <th>Type</th>
@@ -51,7 +52,10 @@ const TableBody = props => {
 		      return (
                <tr key={index}>
                  <td>
-                    <Checkboxes cbOnChange={(checked)=> props.editChecked(index)} />
+                    <Checkboxes 
+                      checked={row.checked} 
+                      cbOnChange={()=> props.editChecked(index)} 
+                    />
                  </td>
                  
                  <td>
