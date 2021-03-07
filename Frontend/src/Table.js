@@ -1,11 +1,11 @@
-import React from 'react'
-import { Dropdown } from 'react-bootstrap'
-import Checkbox from '@material-ui/core/Checkbox';
-import ProgressBar from 'react-bootstrap/ProgressBar'
+import React from "react";
+import { Dropdown } from "react-bootstrap";
+import Checkbox from "@material-ui/core/Checkbox";
+import ProgressBar from "react-bootstrap/ProgressBar";
 
-const Checkboxes = ({checked, cbOnChange})=> {
+const Checkboxes = ({ checked, cbOnChange }) => {
   const handleChange = (event) => {
-      cbOnChange(event.target.checked);
+    cbOnChange(event.target.checked);
   };
 
   return (
@@ -14,101 +14,106 @@ const Checkboxes = ({checked, cbOnChange})=> {
         onChange={handleChange}
         checked={checked}
         color="primary"
-        inputProps={{ 'aria-label': 'primary checkbox' }}
+        inputProps={{ "aria-label": "primary checkbox" }}
       />
-      </div>
+    </div>
   );
-}
+};
 
 const TableHeader = () => {
-	  return (
-		      <thead>
-		        <tr>
-              <th>Select</th>
-	            <th>Tasks</th>
-              <th>Description</th>
-              <th>Due Date</th>
-              <th>Type</th>
-              <th style={{width: '10%'}}>Priority</th>
-		        </tr>
-		      </thead>
-		    ) // style width ensures the priority bar displays correctly
-}
+  return (
+    <thead>
+      <tr>
+        <th>Select</th>
+        <th>Tasks</th>
+        <th>Description</th>
+        <th>Due Date</th>
+        <th>Type</th>
+        <th style={{ width: "10%" }}>Priority</th>
+      </tr>
+    </thead>
+  ); // style width ensures the priority bar displays correctly
+};
 
-const TableBody = props => {
-	  const rows = props.characterData.map((row, index) => {
-      var formattedDate = null
-      if (row.date.length && row.date.length > 0){
-        const date = new Date(row.date)
-        const month = date.getMonth() + 1
+const TableBody = (props) => {
+  const rows = props.characterData.map((row, index) => {
+    var formattedDate = null;
+    if (row.date.length && row.date.length > 0) {
+      const date = new Date(row.date);
+      const month = date.getMonth() + 1;
 
-        formattedDate = month.toString().concat('/',date.getDate(),'/',date.getFullYear())
-      }
-      let textLine = (row.checked === true ? 'line-through' : 'none')
-      let priBar = parseInt(row.priority) * 10
-      let priVar = (priBar > 66 ? "danger" : (priBar > 33 ? "warning" : "success"))
-		      return (
-               <tr key={index}>
-                 <td>
-                 <td>
-                    <Checkboxes 
-                      checked={row.checked} 
-                      cbOnChange={()=> props.editChecked(index)} 
-                    />
-                 </td>
-                 </td>
-                 
-                 <td>
-                  <div style={{textDecorationLine: textLine}}>
-                    {row.task}
-                  </div>
-                 </td>
+      formattedDate = month
+        .toString()
+        .concat("/", date.getDate(), "/", date.getFullYear());
+    }
+    let textLine = row.checked === true ? "line-through" : "none";
+    let priBar = parseInt(row.priority) * 10;
+    let priVar = priBar > 66 ? "danger" : priBar > 33 ? "warning" : "success";
+    return (
+      <tr key={index}>
+        <td>
+          <td>
+            <Checkboxes
+              checked={row.checked}
+              cbOnChange={() => props.editChecked(index)}
+            />
+          </td>
+        </td>
 
-                 <td>
-                  <div style={{textDecorationLine: textLine}}>
-                    {row.desc}
-                  </div>
-                </td>
+        <td>
+          <div style={{ textDecorationLine: textLine }}>{row.task}</div>
+        </td>
 
-                <td>
-                  <div style={{textDecorationLine: textLine}}>
-                  {formattedDate}
-                  </div>
-                </td>
+        <td>
+          <div style={{ textDecorationLine: textLine }}>{row.desc}</div>
+        </td>
 
-                <td>
-                  <div style={{textDecorationLine: textLine}}>
-                    {row.type}
-                  </div>
-                </td>
-                 <td><ProgressBar striped variant={priVar} now={priBar} /></td>
-                 <td>
-                  <Dropdown>
-                      <Dropdown.Toggle variant="success" id="dropdown-basic">
-                          Edit
-                      </Dropdown.Toggle>
+        <td>
+          <div style={{ textDecorationLine: textLine }}>{formattedDate}</div>
+        </td>
 
-                      <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => props.removeCharacter(index)}>Delete</Dropdown.Item>
-                        <Dropdown.Item onClick={() => props.openModal(index)}>Edit Task</Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                 </td>
-               </tr>
-			          )
-		    })
-	  return <tbody>{rows}</tbody>
-}
+        <td>
+          <div style={{ textDecorationLine: textLine }}>{row.type}</div>
+        </td>
+        <td>
+          <ProgressBar striped variant={priVar} now={priBar} />
+        </td>
+        <td>
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Edit
+            </Dropdown.Toggle>
 
-const Table = props => {
-     const { characterData, removeCharacter, openModal, editChecked} = props
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => props.removeCharacter(index)}>
+                Delete
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => props.openModal(index)}>
+                Edit Task
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </td>
+      </tr>
+    );
+  });
+  return <tbody>{rows}</tbody>;
+};
 
-     return (
-            <table style={{width: '100%'}}>
-              <TableHeader />
-              <TableBody characterData={characterData} removeCharacter={removeCharacter} openModal={openModal} editChecked={editChecked}/>
-            </table>
-          )
-}
+const Table = (props) => {
+  const { characterData, removeCharacter, openModal, editChecked } = props;
 
-export default Table
+  return (
+    <table style={{ width: "100%" }}>
+      <TableHeader />
+      <TableBody
+        characterData={characterData}
+        removeCharacter={removeCharacter}
+        openModal={openModal}
+        editChecked={editChecked}
+      />
+    </table>
+  );
+};
+
+export default Table;
