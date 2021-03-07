@@ -65,7 +65,13 @@ const TableBody = props => {
                     {row.desc}
                   </div>
                 </td>
-                <td>{formattedDate}</td>
+
+                <td>
+                  <div style={{textDecorationLine: textLine}}>
+                  {formattedDate}
+                  </div>
+                </td>
+
                 <td>
                   <div style={{textDecorationLine: textLine}}>
                     {row.type}
