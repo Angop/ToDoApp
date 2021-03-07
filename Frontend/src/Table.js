@@ -25,7 +25,7 @@ const TableHeader = () => {
 		      <thead>
 		        <tr>
               <th>Select</th>
-	      <th>Tasks</th>
+	            <th>Tasks</th>
               <th>Description</th>
               <th>Due Date</th>
               <th>Type</th>
@@ -50,7 +50,12 @@ const TableBody = props => {
 		      return (
                <tr key={index}>
                  <td>
-                    <Checkboxes cbOnChange={(checked)=> props.editChecked(index)} />
+                 <td>
+                    <Checkboxes 
+                      checked={row.checked} 
+                      cbOnChange={()=> props.editChecked(index)} 
+                    />
+                 </td>
                  </td>
                  
                  <td>
