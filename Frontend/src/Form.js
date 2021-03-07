@@ -23,8 +23,6 @@ class Form extends Component {
     submitForm = () => {
       let nPriority = parseInt(this.state.priority)
       if (nPriority !== NaN && nPriority > 0 && nPriority <= 10) { // Check that the priority is valid
-        /*this.props.handleSubmit(this.state)
-        this.setState(this.initialState)*/
      }
      else {
          alert("Priority must be a number from 1 to 10.")
