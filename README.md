@@ -1,7 +1,7 @@
 # ToDoApp
 
-About this project: This repository contains a simple To-Do App. It uses MongoDB, Flask, and React to produce a working application. It features include adding, 
-marking as complete, deleting, and editing a task with a name, optional due date, optional priority, and a checkbox.
+About this project: This repository contains a simple To-Do App. It uses MongoDB, Flask, and React to produce a working application. Its features include adding, 
+marking as complete, deleting, and editing tasks with a name, optional due date, optional priority, and a checkbox.
 
 
 
