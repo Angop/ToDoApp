@@ -184,7 +184,7 @@ class App extends Component {
             mChar = {
             task: '',
             desc: '',
-            priority: '',
+            priority: '0',
             date: "", 
             checked: false,
             type: '',

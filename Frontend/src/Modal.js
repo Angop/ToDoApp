@@ -7,7 +7,7 @@ class MyModal extends Component {
      initialState = {
        task: '',
        desc: '',
-       priority: '',
+       priority: '0',
        date: "", 
        checked: false,
        type: '',
