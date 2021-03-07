@@ -42,7 +42,6 @@ class Form extends Component {
 
    render() {
         const { task, desc, priority, date } = this.state;
-
         return (
                <form>
                  <label htmlFor="task">Task</label>
@@ -60,6 +59,7 @@ class Form extends Component {
                    id="desc"
                    value={desc}
                    onChange={this.handleChange} />
+
 		 <label htmlFor="date">Due Date (optional)</label>
                  <input
                    type = "date"
@@ -67,11 +67,11 @@ class Form extends Component {
                    id = "date"
                    value={date}
                    onChange={this.handleChange} />
-                   <input type="button" value="Submit" onClick={this.submitForm} />
-
+            
                  <label htmlFor="type">Type</label>
                  <select name="type" onChange={this.handleChange}>
-                   <option selected disabled>Please choose...</option>  <option name="type" id="type" value="School">School</option>
+                   <option selected disabled>Please choose...</option>
+                   <option name="type" id="type" value="School">School</option>
                    <option name="type" id="type" value="Work">Work</option>
                    <option name="type" id="type" value="Errand">Errand</option>
                    <option name="type" id="type" value="House Work">House Work</option>
@@ -79,13 +79,20 @@ class Form extends Component {
                  </select> 
 
                  <label htmlFor="priority">Priority (Number 1-10)</label>
-                 <input
-                   type="text"
-                   name="priority"
-                   id="priority"
-                   value={priority}
-                   onChange={this.handleChange} />
-                  <input type="button" value="Submit" onClick={this.submitForm} />
+                 <div className="slider-parent">
+                   <input
+                     type="range"
+                     name="priority"
+                     id="priority"
+                     min="0"
+                     max="10"
+                     steps="1"
+                     value={priority}
+                     onChange={this.handleChange} />
+                  <output>{priority}</output>
+                </div>
+
+                 <input type="button" value="Submit" onClick={this.submitForm} />
                </form>
              );
    }
