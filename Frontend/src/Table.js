@@ -29,7 +29,6 @@ const TableHeader = () => {
               <th>Description</th>
               <th>Due Date</th>
               <th>Type</th>
-              <th>Date</th>
               <th style={{width: '10%'}}>Priority</th>
 		        </tr>
 		      </thead>
