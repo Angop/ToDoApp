@@ -26,7 +26,7 @@ You may need to add package.json and package-lock.json first. Next run the follo
     - Boot up mongo.exe -> use users
 
 2. Open command prompt -> navigate to ToDo/Backend -> run cmds:
-3. 
+
     `set FLASK_APP=flask_backend.py`
     
     `set FLASK_ENV=development`
