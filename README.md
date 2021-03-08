@@ -14,8 +14,11 @@ and https://flask.palletsprojects.com/en/1.1.x/installation/ to install Flask.
 
 Pull from the main github branch then go into the Frontend folder in a command prompt. Install npm with the line "npm install". 
 You may need to add package.json and package-lock.json first. Next run the following lines to install necessary libraries:
+
   `npm install flask_cors`
+  
   `npm install react-bootstrap bootstrap`
+  
   `npm install @material-ui/core`
 
 1. To start up the app:
@@ -23,6 +26,7 @@ You may need to add package.json and package-lock.json first. Next run the follo
 
 2. Open command prompt -> navigate to ToDo/Backend -> run cmds:
     `set FLASK_APP=flask_backend.py`
+    
     `set FLASK_ENV=development`
     
 3. Open another command prompt -> navigate to ToDo/Frontend -> npm start
