@@ -64,7 +64,7 @@ const TableBody = props => {
         formattedDate = month.toString().concat('/',date.getDate()+1,'/',date.getFullYear())
       }
       let textLine = (row.checked === true ? 'line-through' : 'none')
-      let priBar = parseInt(row.priority) * 10
+      let priBar = (row.checked === true ? 0 : (parseInt(row.priority) * 10))
       let priVar = (priBar > 66 ? "danger" : (priBar > 33 ? "warning" : "success"))
 		      return (
                <tr key={index}>

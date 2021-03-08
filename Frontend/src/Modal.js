@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import { ModalTitle } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 class MyModal extends Component {
+  // Modal includes edit an existing task and add a new task
+  // Its in 'add new task mode' if the modalCharacter is null
+  // otherwise its 'edit existing task mode'
+
   initialState = {
     task: "",
     desc: "",
@@ -61,6 +66,8 @@ class MyModal extends Component {
         Please choose...
       </option>
     );
+
+    // set currently selected type
     if (this.state.type) {
       // if type is already selected
       defaultType = (
@@ -69,10 +76,17 @@ class MyModal extends Component {
         </option>
       );
     } // Not ideal, the selected option will be repeated in the table twice
+
+    // set the title of modal TODO
+    let modalTitle = "Edit Task"
+    if (this.props.modalCharacter === this.initialState) {
+      modalTitle = "Add Task"
+    }
+
     return (
       <Modal show={this.props.show} onHide={this.props.closeModal}>
         <Modal.Header>
-          <Modal.Title>Edit task</Modal.Title>
+          <Modal.Title>{modalTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <label htmlFor="task">Task</label>
