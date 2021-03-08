@@ -30,19 +30,38 @@ const TableHeader = () => {
               <th>Due Date</th>
               <th>Type</th>
               <th style={{width: '10%'}}>Priority</th>
+              <th></th>
 		        </tr>
 		      </thead>
 		    ) // style width ensures the priority bar displays correctly
 }
 
 const TableBody = props => {
+    props.characterData.sort((a,b) => {
+      if (a.date == ''){
+        if (b.date == ''){
+          return (b.priority - a.priority)
+        }
+        return -1;
+      }
+      if (b.date == ''){
+        return 1;
+      }
+      var dateA = new Date(a.date)
+      const dateB = new Date(b.date)
+      const diff = (dateA.valueOf() - dateB.valueOf())
+      if (diff == 0){
+        return (b.priority - a.priority)
+      }
+      return diff
+    })
 	  const rows = props.characterData.map((row, index) => {
       var formattedDate = null
       if (row.date.length && row.date.length > 0){
         const date = new Date(row.date)
         const month = date.getMonth() + 1
 
-        formattedDate = month.toString().concat('/',date.getDate(),'/',date.getFullYear())
+        formattedDate = month.toString().concat('/',date.getDate()+1,'/',date.getFullYear())
       }
       let textLine = (row.checked === true ? 'line-through' : 'none')
       let priBar = parseInt(row.priority) * 10
@@ -96,7 +115,7 @@ const TableBody = props => {
                  </td>
                </tr>
 			          )
-		    })
+        })
 	  return <tbody>{rows}</tbody>
 }
 

@@ -199,7 +199,7 @@ class App extends Component {
             </div>
 
             <div className="container">
-               <input type="button" value="Add Character" onClick={this.newCharacter} />
+               <input type="button" value="Add Task" onClick={this.newCharacter} />
                <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}  openModal={this.openModal} editChecked={this.editChecked} />
                <MyModal show={showModal} handleModalSubmit={this.handleModalSubmit} closeModal={this.closeModal} 
                modalCharacter={(modalCharacter ? modalCharacter : mChar)}/>
