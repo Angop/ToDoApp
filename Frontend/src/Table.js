@@ -21,49 +21,67 @@ const Checkboxes = ({ checked, cbOnChange }) => {
 };
 
 const TableHeader = () => {
-  return (
-    <thead>
-      <tr>
-        <th>Select</th>
-        <th>Tasks</th>
-        <th>Description</th>
-        <th>Due Date</th>
-        <th>Type</th>
-        <th style={{ width: "10%" }}>Priority</th>
-      </tr>
-    </thead>
-  ); // style width ensures the priority bar displays correctly
-};
+	  return (
+		      <thead>
+		        <tr>
+              <th>Select</th>
+	            <th>Tasks</th>
+              <th>Description</th>
+              <th>Due Date</th>
+              <th>Type</th>
+              <th style={{width: '10%'}}>Priority</th>
+              <th></th>
+		        </tr>
+		      </thead>
+		    ) // style width ensures the priority bar displays correctly
+}
 
-const TableBody = (props) => {
-  const rows = props.characterData.map((row, index) => {
-    var formattedDate = null;
-    if (row.date.length && row.date.length > 0) {
-      const date = new Date(row.date);
-      const month = date.getMonth() + 1;
+const TableBody = props => {
+    props.characterData.sort((a,b) => {
+      if (a.date == ''){
+        if (b.date == ''){
+          return (b.priority - a.priority)
+        }
+        return -1;
+      }
+      if (b.date == ''){
+        return 1;
+      }
+      var dateA = new Date(a.date)
+      const dateB = new Date(b.date)
+      const diff = (dateA.valueOf() - dateB.valueOf())
+      if (diff == 0){
+        return (b.priority - a.priority)
+      }
+      return diff
+    })
+	  const rows = props.characterData.map((row, index) => {
+      var formattedDate = null
+      if (row.date.length && row.date.length > 0){
+        const date = new Date(row.date)
+        const month = date.getMonth() + 1
 
-      formattedDate = month
-        .toString()
-        .concat("/", date.getDate(), "/", date.getFullYear());
-    }
-    let textLine = row.checked === true ? "line-through" : "none";
-    let priBar = parseInt(row.priority) * 10;
-    let priVar = priBar > 66 ? "danger" : priBar > 33 ? "warning" : "success";
-    return (
-      <tr key={index}>
-        <td>
-          <td>
-            <Checkboxes
-              checked={row.checked}
-              cbOnChange={() => props.editChecked(index)}
-            />
-          </td>
-        </td>
-
-        <td>
-          <div style={{ textDecorationLine: textLine }}>{row.task}</div>
-        </td>
-
+        formattedDate = month.toString().concat('/',date.getDate()+1,'/',date.getFullYear())
+      }
+      let textLine = (row.checked === true ? 'line-through' : 'none')
+      let priBar = parseInt(row.priority) * 10
+      let priVar = (priBar > 66 ? "danger" : (priBar > 33 ? "warning" : "success"))
+		      return (
+               <tr key={index}>
+                 <td>
+                 <td>
+                    <Checkboxes 
+                      checked={row.checked} 
+                      cbOnChange={()=> props.editChecked(index)} 
+                    />
+                 </td>
+                 </td>
+                 
+                 <td>
+                  <div style={{textDecorationLine: textLine}}>
+                    {row.task}
+                  </div>
+                 </td>
         <td>
           <div style={{ textDecorationLine: textLine }}>{row.desc}</div>
         </td>
@@ -83,7 +101,6 @@ const TableBody = (props) => {
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               Edit
             </Dropdown.Toggle>
-
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => props.removeCharacter(index)}>
                 Delete

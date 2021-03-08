@@ -138,6 +138,7 @@ class App extends Component {
     });
   };
 
+
   editChecked = (index) => {
     const { characters } = this.state;
     let character = characters[index];
@@ -204,7 +205,7 @@ class App extends Component {
         <div className="container">
           <input
             type="button"
-            value="Add Character"
+            value="Add Task"
             onClick={this.newCharacter}
           />
           <Table
