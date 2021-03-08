@@ -31,7 +31,7 @@ You may need to add package.json and package-lock.json first. Next run the follo
     
     `set FLASK_ENV=development`
     
-3. Open another command prompt -> navigate to ToDo/Frontend -> npm start
+3. Open another command prompt -> navigate to ToDo/Frontend -> `npm start`
 
 
 Style guides:
