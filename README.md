@@ -3,7 +3,8 @@
 About this project: This repository contains a simple To-Do App. It uses MongoDB, Flask, and React to produce a working application. Its features include adding tasks to a list (or table) of tasks, a checkbox to mark them as complete, and options to delete and edit tasks. All tasks have a name, a description, a due date, a type, and a priority, all of which are optional in the form to add tasks. When a task is added to the list, it is automatically sorted into the table in ascending order by date, and then in descending order by priority. Prioirty is represented in the table by a color-changing prioirty bar which is completely filled at the highest priority (10) and empty at the lowest priority (0). Tasks also contain value for whether it has been completed marked as complete via the checkbox (tasks are incomplete by default). When the checkbox is marked, the task is "crossed out" and the priority bar automatically goes to 0.
 
 UI Prototype: https://www.figma.com/file/YEuM5o1MzTNUlDhU2L3GSa/To-Do-App?node-id=0%3A1
-
+Class Diagram: https://github.com/Angop/ToDoApp/wiki/Class-Diagram
+Use-Case Diagram: https://github.com/Angop/ToDoApp/wiki/Use-Case-Diagram
 
 Development environment set up:
 Install MonogoDB from https://docs.mongodb.com/manual/administration/install-community/ .
