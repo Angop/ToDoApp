@@ -69,12 +69,10 @@ const TableBody = props => {
 		      return (
                <tr key={index}>
                  <td>
-                 <td>
                     <Checkboxes 
                       checked={row.checked} 
                       cbOnChange={()=> props.editChecked(index)} 
                     />
-                 </td>
                  </td>
                  
                  <td>
