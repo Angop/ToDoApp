@@ -1,11 +1,11 @@
-import React from 'react'
-import { Dropdown } from 'react-bootstrap'
-import Checkbox from '@material-ui/core/Checkbox';
-import ProgressBar from 'react-bootstrap/ProgressBar'
+import React from "react";
+import { Dropdown } from "react-bootstrap";
+import Checkbox from "@material-ui/core/Checkbox";
+import ProgressBar from "react-bootstrap/ProgressBar";
 
-const Checkboxes = ({checked, cbOnChange})=> {
+const Checkboxes = ({ checked, cbOnChange }) => {
   const handleChange = (event) => {
-      cbOnChange(event.target.checked);
+    cbOnChange(event.target.checked);
   };
 
   return (
@@ -14,11 +14,11 @@ const Checkboxes = ({checked, cbOnChange})=> {
         onChange={handleChange}
         checked={checked}
         color="primary"
-        inputProps={{ 'aria-label': 'primary checkbox' }}
+        inputProps={{ "aria-label": "primary checkbox" }}
       />
-      </div>
+    </div>
   );
-}
+};
 
 const TableHeader = () => {
 	  return (
@@ -82,52 +82,55 @@ const TableBody = props => {
                     {row.task}
                   </div>
                  </td>
+        <td>
+          <div style={{ textDecorationLine: textLine }}>{row.desc}</div>
+        </td>
 
-                 <td>
-                  <div style={{textDecorationLine: textLine}}>
-                    {row.desc}
-                  </div>
-                </td>
+        <td>
+          <div style={{ textDecorationLine: textLine }}>{formattedDate}</div>
+        </td>
 
-                <td>
-                  <div style={{textDecorationLine: textLine}}>
-                  {formattedDate}
-                  </div>
-                </td>
+        <td>
+          <div style={{ textDecorationLine: textLine }}>{row.type}</div>
+        </td>
+        <td>
+          <ProgressBar striped variant={priVar} now={priBar} />
+        </td>
+        <td>
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Edit
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => props.removeCharacter(index)}>
+                Delete
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => props.openModal(index)}>
+                Edit Task
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </td>
+      </tr>
+    );
+  });
+  return <tbody>{rows}</tbody>;
+};
 
-                <td>
-                  <div style={{textDecorationLine: textLine}}>
-                    {row.type}
-                  </div>
-                </td>
-                 <td><ProgressBar striped variant={priVar} now={priBar} /></td>
-                 <td>
-                  <Dropdown>
-                      <Dropdown.Toggle variant="success" id="dropdown-basic">
-                          Edit
-                      </Dropdown.Toggle>
+const Table = (props) => {
+  const { characterData, removeCharacter, openModal, editChecked } = props;
 
-                      <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => props.removeCharacter(index)}>Delete</Dropdown.Item>
-                        <Dropdown.Item onClick={() => props.openModal(index)}>Edit Task</Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                 </td>
-               </tr>
-			          )
-        })
-	  return <tbody>{rows}</tbody>
-}
+  return (
+    <table style={{ width: "100%" }}>
+      <TableHeader />
+      <TableBody
+        characterData={characterData}
+        removeCharacter={removeCharacter}
+        openModal={openModal}
+        editChecked={editChecked}
+      />
+    </table>
+  );
+};
 
-const Table = props => {
-     const { characterData, removeCharacter, openModal, editChecked} = props
-
-     return (
-            <table style={{width: '100%'}}>
-              <TableHeader />
-              <TableBody characterData={characterData} removeCharacter={removeCharacter} openModal={openModal} editChecked={editChecked}/>
-            </table>
-          )
-}
-
-export default Table
+export default Table;

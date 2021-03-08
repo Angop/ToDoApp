@@ -1,6 +1,7 @@
 # ToDoApp
 
-About this project:
+About this project: This repository contains a simple To-Do App. It uses MongoDB, Flask, and React to produce a working application. Its features include adding, 
+marking as complete, deleting, and editing tasks with a name, optional due date, optional priority, and a checkbox.
 
 
 
@@ -23,13 +24,13 @@ To start up the app:
 Boot up mongo.exe -> use users
 
 Open command prompt -> navigate to ToDo/Backend -> run cmds:
-    set FLASK_APP=flask_backend.py
-    set FLASK_ENV=development
+    "set FLASK_APP=flask_backend.py"
+    "set FLASK_ENV=development"
     
 Open another command prompt -> navigate to ToDo/Frontend -> npm start
 
 
-Diagrams:
+Diagrams: TODO
 
 
 Style guides:
