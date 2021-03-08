@@ -19,21 +19,6 @@ class Model(dict):
                 { "_id": ObjectId(self._id) }, {"task": self.task, "desc": self.desc, "priority": self.priority, "type": self.type, "checked": self.checked, "date": self.date})
         self._id = str(self._id)
 
-    def edit(self):
-        if self._id:
-            self.collection.update(
-                { "_id": ObjectId(self._id) }, self)
-            self._id = str(self._id)
-
-    def reload(self):
-        if self._id:
-            result = self.collection.find_one({"_id": ObjectId(self._id)})
-            if result :
-                self.update(result)
-                self._id = str(self._id)
-                return True
-        return False
-
     def remove(self):
         if self._id:
             resp = self.collection.remove({"_id": ObjectId(self._id)})

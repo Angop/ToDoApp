@@ -49,13 +49,3 @@ def get_users():
       updatedUser.save()
       resp = jsonify(updatedUser), 204
       return resp
-      
-@app.route('/users/<id>', methods=['GET'])
-
-def get_user(id):
-   if request.method == 'GET':
-      user = User({"_id":id})
-      if user.reload() :
-         return user
-      else :
-         return jsonify({"error": "User not found"}), 404
