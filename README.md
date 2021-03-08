@@ -23,7 +23,7 @@ You may need to add package.json and package-lock.json first. Next run the follo
   
 
 1. To start up the app:
- - Boot up mongo.exe -> use users
+    - Boot up mongo.exe -> use users
 
 2. Open command prompt -> navigate to ToDo/Backend -> run cmds:
 3. 
