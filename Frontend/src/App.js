@@ -41,7 +41,7 @@ class App extends Component {
   };
 
   openModal = (index) => {
-    if (index > 0) {
+    if (index >= 0) {
       const { characters } = this.state;
       this.setState({ modalCharacter: characters[index] });
       this.setState({ showModal: true });
